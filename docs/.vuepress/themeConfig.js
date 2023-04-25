@@ -9,22 +9,22 @@ export default defaultTheme({
   lastUpdatedText: '上次更新',
   //-------------------- navigation config --------------------
   home: '/',
-  navBar: [
+  navbar: [
     {
       text: '首页',
       link: '/'
     },
     {
       text: '文章',
-      link: '/articles'
+      link: '/articles/'
     },
     {
       text: '归档',
-      link: '/'
+      link: '/archives/'
     },
     {
       text: '关于我',
-      link: '/about'
+      link: '/about/'
     }
   ],
   //-------------------- sidebar config --------------------
