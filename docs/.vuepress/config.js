@@ -5,6 +5,7 @@ import { searchPlugin } from '@vuepress/plugin-search';
 
 export default defineUserConfig({
   //-------------------- base config --------------------
+  root: process.cwd(),
   lang: 'zh-CN',
   title: 'Muray\'s space',
   description: '这是我的个人博客站点',

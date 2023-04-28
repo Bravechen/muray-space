@@ -1,0 +1,23 @@
+@use "fns";
+@import url(./common.scss);
+
+:root {
+  font-size: calc(16 * 100vw / 1920); // 以1920为基础全屏宽度，16px为基础字体大小
+  font-family: var(--font-family1);
+  background-color: var(--bg-color1);
+}
+
+body {
+  @include fns.resetAll();
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+.page {
+  box-sizing: border-box;
+  min-height: 100vh;
+  // margin-top: 5.75rem;
+}

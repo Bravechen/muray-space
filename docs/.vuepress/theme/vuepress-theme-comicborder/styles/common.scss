@@ -1,0 +1,24 @@
+@mixin img() {
+  & > img {
+    display: block;
+    width: 100%;
+  }
+}
+
+@mixin flexBtn($w:9rem, $h:2.25rem,$bgColor:var(--theme-color1),$fontSize:1rem,$color:var(--theme-primary-color1)) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $w;
+  height: $h;
+
+  box-sizing: border-box;
+  border-radius: var(--theme-btn-border-r1);
+  border: var(--theme-btn-border1);
+  box-shadow: var(--theme-shadow-color1);
+  background-color: $bgColor;
+
+  font-size: $fontSize;
+  text-align: center;
+  color: $color;
+}

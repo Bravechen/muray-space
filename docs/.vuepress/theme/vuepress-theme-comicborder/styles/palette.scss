@@ -1,0 +1,63 @@
+:root {
+  --theme-color1: #ffffff;
+  --theme-color2: #000000;
+  --theme-color3: #A0C3D9;
+  --theme-color4: #0388A6;
+  --theme-color5: #024959;
+  --theme-color6: #F2B705;
+  --theme-color7: #BF7E06;
+  --theme-color8: #5e8c65;
+  --theme-color9: #f2d16d;
+  --theme-color10: #f2b366;
+  --theme-color11: #a6523f;
+  --theme-color12: #f2cbc4;
+
+  // background-color
+  --bg-color1: #ffffff;
+
+  // tips color
+  --tip-info-color: #A0C3D9;
+  --tip-info-font-color: #0388A6;
+  --tip-success-bg-color: #9ab59e;
+  --tip-success-font-color: #5e8c65;
+  --tip-warning-bg-color: #f2d16d;
+  --tip-warning-font-color: #BF7E06;
+  --tip-error-bg-color: #f2cbc4;
+  --tip-error-font-color: #a6523f;
+
+  // border color
+  --border-color1: #000000;
+  --theme-border1: 0.125rem solid #000000;
+  --theme-border-radius1: 0.625rem;
+  --theme-border-radius2: 0.5rem;
+  --theme-border-radius2: 0.25rem;
+
+  // container
+  --theme-container-padding1: 1.5rem;
+
+  // font color
+  --theme-font-color1: #000000;
+  --theme-font-color2: #0388A6;
+
+  // font family
+  --font-family1: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --theme-font-bold: 600;
+  --theme-font-color1: #6c6c6c;
+
+  // shadow color
+  --theme-shadow-color1: 0 2px 0 0 #000000;
+
+  // button
+  --theme-btn-border1: 2px solid #000000;
+  --theme-btn-border-r1: 0.25rem;
+
+  // navs
+  --theme-nav-font-size: 1rem;
+  --theme-nav-box-padding1: 0.875rem 1.5rem;
+  --theme-navbar-padding1: 0 1.5rem;
+  --theme-nav-item-padding: 0.25rem 0.625rem;
+  --theme-nav-home-hover-color: #0388A6;
+  --theme-nav-category-hover-color: #F2B705;
+  --theme-nav-archive-hover-color: #5e8c65;
+  --theme-nav-about-hover-color: #a6523f;
+}
