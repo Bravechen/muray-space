@@ -3,3 +3,5 @@
 /.vscode/settings.json
 .temp
 .cache
+docs/.vuepress/dist
+

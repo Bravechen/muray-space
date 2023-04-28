@@ -17,11 +17,11 @@ import './styles/palette.scss';
  */
 function addRouterHooks({ app, router, siteData }) {
   router.beforeEach((to, from) => {
-    console.log('before navigation, to:', to, '<------>', 'from:', from);
+    // console.log('before navigation, to:', to, '<------>', 'from:', from);
   });
 
   router.afterEach((to, from) => {
-    console.log('after navigation, to:', to, '<------>', 'from:', from);
+    // console.log('after navigation, to:', to, '<------>', 'from:', from);
   });
 }
 //============================================================
@@ -37,7 +37,7 @@ app 是由 createApp 创建的 Vue 应用实例。
 //============================================================
 export default defineClientConfig({
   enhance(ctx) {
-    console.log('siteData:', ctx.siteData);
+    // console.log('siteData:', ctx.siteData);
 
     addRouterHooks(ctx);
   },

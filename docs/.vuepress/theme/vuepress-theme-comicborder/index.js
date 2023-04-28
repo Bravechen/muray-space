@@ -18,21 +18,21 @@ function combineSiteData(siteData = {}, themeConfigs = {}) {
 }
 //============================================================
 export const comicborderTheme = (clientThemeOpt, ...args) => {
-  debugger;
-  console.log('用户主题配置:', clientThemeOpt);
+  // debugger;
+  // console.log('用户主题配置:', clientThemeOpt);
   // options是用户配置的主题选项配置
   // app包含了node api
   return (app) => {
-    debugger;
+    // debugger;
     const { siteData, options } = app;
-    console.log(
-      'siteData:', siteData,'\n',
-      'options:', options,'\n',
-      'app.dir:', '\n',
-      'cache:', app.dir.cache(),'\n',
-      'source:', app.dir.source(),'\n',
-      'temp:', app.dir.temp(),'\n',
-    );
+    // console.log(
+    //   'siteData:', siteData,'\n',
+    //   'options:', options,'\n',
+    //   'app.dir:', '\n',
+    //   'cache:', app.dir.cache(),'\n',
+    //   'source:', app.dir.source(),'\n',
+    //   'temp:', app.dir.temp(),'\n',
+    // );
     app.siteData = combineSiteData(siteData, clientThemeOpt);
     // 返回一个主题对象
     return {
@@ -52,7 +52,7 @@ export const comicborderTheme = (clientThemeOpt, ...args) => {
 //-------------------- dev cycle --------------------
       extendsPageOptions(pageOpt, app) {
         // debugger;
-        console.log(pageOpt);
+        // console.log(pageOpt);
         filterArtPagesLayout(pageOpt, app.dir.source('articles/'));
       },
       extendsPage(page, app) {
