@@ -19,5 +19,13 @@ a {
 .page {
   box-sizing: border-box;
   min-height: 100vh;
-  // margin-top: 5.75rem;
+
+}
+
+figure, ul, li, h3, p {
+  @include fns.resetAll();
+}
+
+ul, li  {
+  list-style: none;
 }

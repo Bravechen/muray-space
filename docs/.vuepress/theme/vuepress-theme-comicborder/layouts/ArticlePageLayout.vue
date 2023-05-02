@@ -1,17 +1,17 @@
 <template>
-  <!-- <Header /> -->
+  <Header />
   <main>
     <Content />
   </main>
-  <!-- <Footer /> -->
+  <Footer />
 </template>
 
 <style lang="scss"></style>
 
 <script setup>
 import { usePageData, usePageFrontmatter } from '@vuepress/client';
-// import Header from '../components/Header.vue';
-// import Footer from '../components/Footer.vue';
+import Header from '../components/Header.vue';
+import Footer from '../components/Footer.vue';
 
 const pageData = usePageData();
 const frontmatter = usePageFrontmatter();

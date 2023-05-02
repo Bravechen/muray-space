@@ -22,3 +22,7 @@
   text-align: center;
   color: $color;
 }
+
+@mixin normalPage() {
+  margin-top: 5.75rem;
+}

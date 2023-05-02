@@ -85,6 +85,8 @@
           border-radius: 50%;
           user-select: none;
           margin-bottom: 1.5rem;
+
+          @include img();
         }
 
         &>.site-title {
@@ -186,6 +188,7 @@
         flex-direction: column;
         // align-items: center;
         justify-content: center;
+        min-height: 8.375rem;
 
         box-sizing: border-box;
         padding: var(--theme-container-padding1);
@@ -221,44 +224,41 @@
 
         &:hover {
           &:nth-child(1) {
-            border-color: var(--theme-color7);
-            box-shadow: 0 2px 0 0 var(--theme-color7);
-            background-color: rgba(191, 126, 6, 0.2);
+            box-shadow: 0 2px 0 0 var(--theme-color2);
+            background-color: var(--theme-color7);
 
             .item-title {
-              color: var(--theme-color7);
+              color: var(--theme-color1);
             }
 
             .item-detail {
-              color: var(--theme-color7);
+              color: var(--theme-color1);
             }
           }
 
           &:nth-child(2) {
-            border-color: var(--theme-color8);
-            box-shadow: 0 2px 0 0 var(--theme-color8);
-            background-color: rgba(94, 140, 101, 0.2);
+            box-shadow: 0 2px 0 0 var(--theme-color2);
+            background-color: var(--theme-color8);
 
             .item-title {
-              color: var(--theme-color8);
+              color: var(--theme-color1);
             }
 
             .item-detail {
-              color: var(--theme-color8);
+              color: var(--theme-color1);
             }
           }
 
           &:nth-child(3) {
-            border-color: var(--theme-color11);
-            box-shadow: 0 2px 0 0 var(--theme-color11);
-            background-color: rgba(166, 82, 63, 0.2);
+            box-shadow: 0 2px 0 0 var(--theme-color2);
+            background-color: var(--theme-color11);
 
             .item-title {
-              color: var(--theme-color11);
+              color: var(--theme-color1);
             }
 
             .item-detail {
-              color: var(--theme-color11);
+              color: var(--theme-color1);
             }
           }
         }

@@ -1,9 +1,9 @@
 <template>
-  <!-- <Header /> -->
+  <Header />
   <main>
-    <Content />
+    <!-- <Content /> -->
   </main>
-  <!-- <Footer /> -->
+  <Footer />
 </template>
 
 <style lang="scss"></style>

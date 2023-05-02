@@ -10,6 +10,8 @@ lastUpdated: true
 # contributors: true
 # prev: ''
 # next: ''
+# tags:
+coverImg: "/assets/beach-g8153c8171_640.jpg"
 ---
 
 ![image](/assets/beach-g8153c8171_640.jpg)

@@ -1,7 +1,7 @@
 import { chalk } from '@vuepress/utils';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { filterNavPagesIndexLayout, filterArtPagesLayout } from './pages/pageTools.js';
+import { filterNavPagesIndexLayout, filterArtPagesLayout, combineAndSetPagesData } from './pages/pageTools.js';
 //============================================================
 // 插件目录
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -10,6 +10,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 function combineSiteData(siteData = {}, themeConfigs = {}) {
   return {
     ...siteData,
+    articlesData: {
+      articles: [],
+      artListByYear: {},
+      artTags: {},
+      artListByTag: {},
+    },
     theme: {
       logo: themeConfigs.logo || '',
       navs: [...(themeConfigs.navbar || [])],
@@ -58,7 +64,10 @@ export const comicborderTheme = (clientThemeOpt, ...args) => {
       extendsPage(page, app) {
         // debugger;
         // console.log(page);
-        filterNavPagesIndexLayout(page);
+        // filterNavPagesIndexLayout(page);
+        let obj = combineAndSetPagesData(page, app);
+        page = obj.page;
+        app = obj.app;
       },
 //-------------------- life cycle --------------------
       // 其他的插件 API 也都可用
