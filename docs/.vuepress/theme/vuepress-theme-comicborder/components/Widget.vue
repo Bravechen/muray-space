@@ -1,7 +1,8 @@
 <template>
   <div class="widget-box">
-    <Calendar v-if="widget.calendar" />
-
+    <ClientOnly>
+      <Calendar v-if="widget.calendar" />
+    </ClientOnly>
   </div>
 </template>
 
