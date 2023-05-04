@@ -30,10 +30,11 @@ const matter = usePageFrontmatter();
 const widget = matter.value.widget;
 
 console.log('widget====>>', widget);
-let Calendar;
-if (!__VUEPRESS_SSR__ && widget.calendar) {
-  Calendar = defineAsyncComponent(() => import('../widget/Calendar.vue'));
-}
+// let Calendar;
+// if (!__VUEPRESS_SSR__ && widget.calendar) {
+//   Calendar = defineAsyncComponent(() => import('../widget/Calendar.vue'));
+// }
+const Calendar = defineAsyncComponent(() => import('../widget/Calendar.vue'));
 
 </script>
 
