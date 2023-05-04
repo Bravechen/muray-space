@@ -88,9 +88,9 @@
 
 <script setup>
 import { computed } from 'vue';
-// import { NCalendar, NConfigProvider, zhCN, dateZhCN } from 'naive-ui';
-import ui from 'naive-ui';
-const { NCalendar, NConfigProvider, zhCN, dateZhCN } = ui;
+import { NCalendar, NConfigProvider, zhCN, dateZhCN } from 'naive-ui';
+// import ui from 'naive-ui';
+// const { NCalendar, NConfigProvider, zhCN, dateZhCN } = ui;
 
 const calendarStyle = computed(function () {
   return {
