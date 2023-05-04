@@ -21,7 +21,7 @@ features:
     details: 实践出真知，不试试怎么能学会
   - title: 学一下
     details: 我读书少，你不要骗我
-footer: <div>Powered by <a href="https://v2.vuepress.vuejs.org/zh/" target="_blank">Vuepress</a></div>
-footerHtml: true
+# footer: 
+# footerHtml: true
 ---
 

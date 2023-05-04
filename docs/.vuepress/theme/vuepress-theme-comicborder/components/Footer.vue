@@ -1,7 +1,10 @@
 <template>
   <footer class="footer">
-    <div class="copyright">Copyright &copy;2023 {{ site.title }}, All Rights Reversed</div>
     <component class="c-footer-html" is="div" v-if="matter.footerHtml" v-html="matter.footer" />
+    <template v-else>
+      <div class="copyright">Copyright &copy;2023 {{ site.title }}, All Rights Reversed</div>
+      <div class="power-by">Powered by <a href="https://v2.vuepress.vuejs.org/zh/" target="_blank">Vuepress</a></div>
+    </template>
   </footer>
 </template>
 
@@ -22,7 +25,7 @@
     font-weight: var(--theme-font-bold);
   }
 
-  .c-footer-html {
+  .power-by {
     font-size: 0.875rem;
     font-weight: var(--theme-font-bold);
 
