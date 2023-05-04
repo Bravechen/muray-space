@@ -2,7 +2,8 @@
   <div class="widget-box">
     <!-- <Calendar v-if="widget.calendar" /> -->
     <ClientOnly>
-      <component v-if="widget.calendar" :is="Calendar" />
+      <!-- <component v-if="widget.calendar" :is="Calendar" /> -->
+      <Calendar v-if="widget.calendar" />
     </ClientOnly>
   </div>
 </template>
