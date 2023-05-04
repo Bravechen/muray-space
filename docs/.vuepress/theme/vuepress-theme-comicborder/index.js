@@ -19,6 +19,8 @@ function combineSiteData(siteData = {}, themeConfigs = {}) {
     theme: {
       logo: themeConfigs.logo || '',
       navs: [...(themeConfigs.navbar || [])],
+      socials: [...(themeConfigs.sidebar?.socials || [])],
+      subTitle: themeConfigs.sidebar?.subTitle || '',
     },
   };
 }

@@ -10,6 +10,7 @@
 body {
   @include fns.resetAll();
   overflow-x: hidden;
+  font-family: var(--font-family1);
 }
 
 a {
@@ -22,7 +23,7 @@ a {
 
 }
 
-figure, ul, li, h3, p {
+figure, ul, li, h1, h2, h3, h4, p {
   @include fns.resetAll();
 }
 

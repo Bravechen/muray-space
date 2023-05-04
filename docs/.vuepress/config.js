@@ -1,7 +1,11 @@
-import { defineUserConfig } from 'vuepress';
+import { defineUserConfig, viteBundler } from 'vuepress';
 import theme from './themeConfig';
 import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom';
 import { searchPlugin } from '@vuepress/plugin-search';
+
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
 export default defineUserConfig({
   //-------------------- base config --------------------
@@ -37,4 +41,30 @@ export default defineUserConfig({
   ],
   //-------------------- theme --------------------
   theme: theme,
+  //-------------------- bundler --------------------
+  bundler: viteBundler({
+    viteOptions: {
+      build: {
+        target: 'modules',
+      },
+      plugins: [
+        AutoImport({
+          imports: [
+            'vue',
+            {
+              'naive-ui': [
+                // 'useDialog',
+                // 'useMessage',
+                // 'useNotification',
+                // 'useLoadingBar'
+              ]
+            }
+          ]
+        }),
+        Components({
+          resolvers: [NaiveUiResolver()]
+        })
+      ],
+    },
+  })
 });

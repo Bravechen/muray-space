@@ -103,9 +103,27 @@ export default comicborderTheme({
     }
   ],
   //-------------------- sidebar config --------------------
-  // sidebar: {
-
-  // },
+  sidebar: {
+    subTitle: '纵有疾风起，人生不言弃',
+    socials: [
+      {
+        icon: 'github',
+        title: 'my github',
+        link: 'https://github.com/Bravechen'
+      },
+      {
+        icon: '/assets/icons/gitee.svg',
+        title: '码云',
+        link: 'https://gitee.com/muray',
+        iconSize: '1.375rem'
+      },
+      {
+        icon: 'Email',
+        title: 'muray_2018@163.com',
+        link: 'mailto:muray_2018@163.com'
+      }
+    ]
+  },
   // sidebarDepth: 2,
   //-------------------- page config --------------------
   editLink: false,

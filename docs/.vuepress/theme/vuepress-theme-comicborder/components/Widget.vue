@@ -1,15 +1,31 @@
 <template>
-  <div class="widget-box"></div>
+  <div class="widget-box">
+    <Calendar v-if="widget.calendar" />
+
+  </div>
 </template>
 
 <style lang="scss">
 .widget-box {
   flex: 2;
+  display: flex;
+  flex-direction: column;
 
-  margin-left: 1.5rem;
-  margin-right: 2.25rem;
+  margin-left: 3.125rem;
+  margin-right: 0.625rem;
+
+
 }
 </style>
 
-<script setup></script>
+<script setup>
+import { usePageFrontmatter } from '@vuepress/client';
+import Calendar from '../widget/Calendar.vue';
+
+const matter = usePageFrontmatter();
+const widget = matter.value.widget;
+
+console.log('widget====>>', widget);
+
+</script>
 

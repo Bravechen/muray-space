@@ -7,15 +7,16 @@
 .theme-icon {
   display: inline-block;
   vertical-align: middle;
+  overflow: hidden;
 
-  font-size: 1rem;
+  font-size: 0;
   color: var(--theme-color2);
 }
 </style>
 <script setup>
 import { h, computed } from 'vue';
 import { HomeOutlined, MessageOutlined } from '@vicons/antd';
-import { ArchiveOutline } from '@vicons/ionicons5';
+import { ArchiveOutline, LogoGithub, MailOutline } from '@vicons/ionicons5';
 import { CollapseCategories } from '@vicons/carbon';
 
 const prop = defineProps({
@@ -34,10 +35,20 @@ const icons = {
   'icon-category': () => h(ArchiveOutline),
   'icon-archive': () => h(CollapseCategories),
   'icon-about': () => h(MessageOutlined),
+  'github': () => h(LogoGithub),
+  'Email': () => h(MailOutline),
+  'iconImg': (iconUrl) => h(
+    'img',
+    {
+      src: iconUrl,
+      style: `display:block;width: 100%;height: 100%;`
+    }
+  )
 };
 
 function renderIcon(iconName) {
-  return icons[iconName]();
+  const fn = icons[iconName];
+  return typeof fn === 'function' ? icons[iconName]() : icons['iconImg'](iconName);
 }
 
 const iconSize = computed(() => {
@@ -47,4 +58,5 @@ const iconSize = computed(() => {
 
   return prop.size;
 });
+
 </script>

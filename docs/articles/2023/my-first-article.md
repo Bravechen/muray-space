@@ -10,7 +10,9 @@ lastUpdated: true
 # contributors: true
 # prev: ''
 # next: ''
-# tags:
+category: '闲聊'
+tags:
+  - ‘闲聊’
 coverImg: "/assets/beach-g8153c8171_640.jpg"
 ---
 
