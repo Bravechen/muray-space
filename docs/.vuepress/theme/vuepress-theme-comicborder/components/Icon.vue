@@ -1,5 +1,5 @@
 <template>
-  <i v-if="!!icon" class="theme-icon" :style="{ width: iconSize, height: iconSize, }">
+  <i v-if="!!icon" class="theme-icon" :style="iconStyle">
     <component :is="renderIcon(icon)" />
   </i>
 </template>
@@ -8,6 +8,8 @@
   display: inline-block;
   vertical-align: middle;
   overflow: hidden;
+  width: var(--icon-size);
+  height: var(--icon-size);
 
   font-size: 0;
   color: var(--theme-color2);
@@ -51,12 +53,12 @@ function renderIcon(iconName) {
   return typeof fn === 'function' ? icons[iconName]() : icons['iconImg'](iconName);
 }
 
-const iconSize = computed(() => {
-  if (Number.isInteger(prop.size)) {
-    return `${prop.size}px`;
-  }
+const iconStyle = computed(() => {
+  const size = (Number.isInteger(prop.size)) ? `${prop.size}px` : prop.size;
 
-  return prop.size;
+  return {
+    '--icon-size': size,
+  };
 });
 
 </script>

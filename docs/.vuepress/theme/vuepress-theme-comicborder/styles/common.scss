@@ -26,3 +26,15 @@
 @mixin normalPage() {
   margin-top: 5.75rem;
 }
+
+@mixin skeletonStyle($height:100%,$bgColor:var(--s-bg-color), $borderRadius:var(--s-border-radius), $bgColor2:var(--s-bg-color2)) {
+  height: $height;
+  background-color: $bgColor;
+  box-sizing: border-box;
+  border-radius: $borderRadius;
+
+  background-image: linear-gradient(90deg, $bgColor 25%, $bgColor2 37%, $bgColor 63%);
+  background-size: 400% 100%;
+  background-position: 100% 50%;
+  animation: skeleton-loading 1.4s ease infinite;
+}

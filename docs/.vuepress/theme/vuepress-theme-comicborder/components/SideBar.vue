@@ -14,10 +14,16 @@
       <div class="mid-box"></div>
       <div class="bottom-box">
         <div class="social-bar">
-          <a v-for="social in socials" class="social" :key="social.link" :href="social.link" :title="social.title"
-            target="_blank">
-            <Icon :icon="social.icon" :size="social.iconSize || '1.5rem'" />
-          </a>
+          <IconTxext
+            v-for="social in socials"
+            class="social"
+            :key="social.link"
+            :link="social.link"
+            :title="social.title"
+            :width="`1.75rem`"
+            :height="`1.625rem`"
+            :icon="social.icon"
+            :icon-size="social.iconSize || '1.5rem'" />
         </div>
       </div>
     </div>
@@ -90,21 +96,23 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
+
       .social-bar {
-        display: inline-block;
+        // display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         box-sizing: border-box;
         border: var(--theme-border1);
         box-shadow: var(--theme-shadow-color1);
         border-radius: var(--theme-border-radius1);
-        padding: calc((3rem - 1.5rem)/2) 1.125rem;
+        padding: calc((3rem - 1.375rem)/2) 0.875rem;
         background-color: var(--theme-color6);
 
         .social {
-          display: inline-block;
-          width: 1.5rem;
-          height: 1.5rem;
-          margin: 0 0.375rem;
-          font-size: 0;
+          box-sizing: border-box;
+          padding: 0.125rem 0.25rem;
+          margin: 0 0.125rem;
         }
       }
     }
@@ -115,6 +123,7 @@
 <script setup>
 import { useSiteData } from '@vuepress/client';
 import Icon from './Icon.vue';
+import IconTxext from './IconText.vue';
 
 const site = useSiteData();
 const socials = site.value.theme.socials;

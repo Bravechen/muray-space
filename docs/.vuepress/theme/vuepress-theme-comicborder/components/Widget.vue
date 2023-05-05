@@ -1,7 +1,12 @@
 <template>
   <div class="widget-box">
     <ClientOnly>
-      <Calendar v-if="widget.calendar" />
+      <Suspense v-if="widget.calendar">
+        <Calendar />
+        <template #fallback>
+          <CalendarSkeleton />
+        </template>
+      </Suspense>
     </ClientOnly>
   </div>
 </template>
@@ -20,15 +25,21 @@
 </style>
 
 <script setup>
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent, onErrorCaptured } from 'vue';
 import { usePageFrontmatter } from '@vuepress/client';
-
+import CalendarSkeleton from '../widget/CalendarSkeleton.vue';
+//============================================================
 const matter = usePageFrontmatter();
 const widget = matter.value.widget;
-
-console.log('widget====>>', widget);
+//============================================================
 
 const Calendar = defineAsyncComponent(() => import('../widget/Calendar.vue'));
+//============================================================
+onErrorCaptured(function(err, ins, info) {
+  console.error('widget err====>>', err);
+  console.log('ins====>>', ins);
+  console.error('info====>>', info);
+});
 
 </script>
 

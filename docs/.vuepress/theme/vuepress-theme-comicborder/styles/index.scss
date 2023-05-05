@@ -1,5 +1,6 @@
 @use "fns";
-@import url(./common.scss);
+@import './common.scss';
+@import './skeleton.scss';
 
 :root {
   font-size: calc(16 * 100vw / 1920); // 以1920为基础全屏宽度，16px为基础字体大小
@@ -30,3 +31,5 @@ figure, ul, li, h1, h2, h3, h4, p {
 ul, li  {
   list-style: none;
 }
+
+
