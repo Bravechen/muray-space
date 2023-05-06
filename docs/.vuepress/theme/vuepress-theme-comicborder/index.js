@@ -11,16 +11,26 @@ function combineSiteData(siteData = {}, themeConfigs = {}) {
   return {
     ...siteData,
     articlesData: {
-      articles: [],
-      artListByYear: {},
-      artTags: {},
-      artListByTag: {},
+      artPerPageMax: themeConfigs.articles?.perPage || 10,
+      articles: {}, // 所有文章的数据,key为文章id, value为文章数据
+      articleList: [], // 不分页的文章id列表
+      articlePages: [[]], // 分页的文章id列表
+      artListByYear: {}, // 按年份归档的文章id列表
+      artTags: {}, // 所有标签, key为标签id, value为标签数据
+      artListByTag: {}, // 按标签归档的文章id列表
+      artCategories: {}, // 所有分类, key为分类id, value为分类数据
+      artListByCategory: {}, // 按分类归档的文章id列表
     },
     theme: {
       logo: themeConfigs.logo || '',
       navs: [...(themeConfigs.navbar || [])],
       socials: [...(themeConfigs.sidebar?.socials || [])],
       subTitle: themeConfigs.sidebar?.subTitle || '',
+      err404: {
+        notFound: themeConfigs.notFound || ['万分抱歉，您找的这一页我没还写...'],
+        backToHome: themeConfigs.backToHome || '返回首页',
+        notFoundBg: themeConfigs.notFoundBg || '',
+      }
     },
   };
 }
@@ -80,9 +90,9 @@ export const comicborderTheme = (clientThemeOpt, ...args) => {
       },
       // 文件准备完毕，用户client配置也准备好了
       onPrepared(app) {
-        // debugger;
+        debugger;
         // console.log('pages:', app.pages);
-        // filterNavPagesIndex(app);
+
       },
       // dev服务器启动，监听文件修改
       onWatched(app, watchers, restart) {

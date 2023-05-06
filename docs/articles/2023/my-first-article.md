@@ -8,11 +8,10 @@ editLink: false
 # editLinkPattern: ''
 lastUpdated: true
 # contributors: true
-# prev: ''
-# next: ''
 category: '闲聊'
 tags:
-  - ‘闲聊’
+  - '闲聊'
+  - '里程碑'
 coverImg: "/assets/beach-g8153c8171_640.jpg"
 ---
 

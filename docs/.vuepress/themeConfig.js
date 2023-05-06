@@ -132,16 +132,21 @@ export default comicborderTheme({
   docsRepo: '',
   docsBranch: '',
   docsDir: '',
+  //-------------------- articles config --------------------
+  articles: {
+    perPage: 10, // 每页显示的文章数量
+  },
   //-------------------- contributors config --------------------
   contributors: false,
   contributorsText: '',
-  //-------------------- article config --------------------
+  //-------------------- article content config --------------------
   tip: '小提示',
   warning: '注意',
   danger: '警告',
   //-------------------- 404 config --------------------
   notFound: ['怅然若失，页面不见了', '你来到了没有知识的荒原', '你来到了没有网络的荒原', '你来到了没有灵感的世界'],
   backToHome: '首页传送门',
+  notFoundBg: '/assets/404.png',
   //-------------------- aria config --------------------
   openInNewWindow: '在新窗口打开',
   toggleColorMode: '深色模式',
