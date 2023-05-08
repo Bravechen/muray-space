@@ -125,6 +125,10 @@
           @include navHoverEffect(0, var(--theme-nav-home-hover-color));
         }
 
+        &.tags {
+          @include navHoverEffect(0, var(--theme-nav-tags-hover-color));
+        }
+
         &.category {
           @include navHoverEffect(0, var(--theme-nav-category-hover-color));
         }

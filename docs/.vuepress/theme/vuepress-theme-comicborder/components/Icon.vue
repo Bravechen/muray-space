@@ -19,7 +19,7 @@
 import { h, computed } from 'vue';
 import { HomeOutlined, MessageOutlined } from '@vicons/antd';
 import { ArchiveOutline, LogoGithub, MailOutline } from '@vicons/ionicons5';
-import { CollapseCategories } from '@vicons/carbon';
+import { CollapseCategories, Tag } from '@vicons/carbon';
 
 const prop = defineProps({
   icon: {
@@ -34,6 +34,7 @@ const prop = defineProps({
 
 const icons = {
   'icon-home': () => h(HomeOutlined),
+  'icon-tags': () => h(Tag),
   'icon-category': () => h(ArchiveOutline),
   'icon-archive': () => h(CollapseCategories),
   'icon-about': () => h(MessageOutlined),

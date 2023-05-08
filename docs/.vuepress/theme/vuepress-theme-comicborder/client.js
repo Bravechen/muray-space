@@ -7,6 +7,7 @@ import CategoriesLayout from './layouts/CategoriesLayout.vue';
 import HomeLayout from './layouts/HomeLayout.vue';
 import ArticlesLayout from './layouts/ArticlesLayout.vue';
 import ArticlePageLayout from './layouts/ArticlePageLayout.vue';
+import TagsLayout from './layouts/TagsLayout.vue';
 
 import './styles/index.scss';
 import './styles/palette.scss';
@@ -53,6 +54,7 @@ export default defineClientConfig({
     CategoriesLayout,
     HomeLayout,
     ArticlePageLayout,
+    TagsLayout,
   },
   rootComponents: [],
 })

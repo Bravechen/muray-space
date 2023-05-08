@@ -7,6 +7,7 @@ const NAV_PAGES_INDEX_LAYOUTS = {
   archives: "ArchivesLayout",
   categories: "CategoriesLayout",
   articlePage: "ArticlePageLayout",
+  tags: "TagsLayout",
   defaultLayout: "Layout",
 };
 
@@ -117,6 +118,7 @@ function combineArticleTags({ page, app, article }) {
       articlesData.artTags[tagId] = {
         name: tag,
         id: tagId,
+        link: `/tags?tag=${tagId}`
       };
       articlesData.artListByTag[tagId] = [];
     }
@@ -144,6 +146,7 @@ function combineArticleCategories({ page, app, article }) {
     category = {
       name: categoryName,
       id: categoryId,
+      link: `/categories?category=${categoryId}`
     };
     articlesData.artCategories[categoryId] = category;
     articlesData.artListByCategory[categoryId] = [];

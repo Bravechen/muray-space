@@ -96,6 +96,12 @@ export default comicborderTheme({
       name: 'archive'
     },
     {
+      text: '标签',
+      link: '/tags/',
+      icon: 'icon-tags',
+      name: 'tags'
+    },
+    {
       text: '关于我',
       link: '/about/',
       icon: 'icon-about',
