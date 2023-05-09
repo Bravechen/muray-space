@@ -23,7 +23,8 @@
   color: $color;
 }
 
-@mixin normalPage() {
+@mixin normalPage($display:flex) {
+  display: $display;
   margin-top: 5.75rem;
 }
 
@@ -37,4 +38,12 @@
   background-size: 400% 100%;
   background-position: 100% 50%;
   animation: skeleton-loading 1.4s ease infinite;
+}
+
+@mixin pageContent($flex: 5) {
+  flex: $flex;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

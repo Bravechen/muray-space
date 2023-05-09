@@ -112,10 +112,10 @@ const pageData = usePageData();
 const frontmatter = usePageFrontmatter();
 const site = useSiteData();
 
-console.log('This is NotFoundLayout:-------------------');
-console.log('pageData:', pageData.value);
-console.log('frontmatter:', frontmatter.value);
-console.log('site:', site.value);
+// console.log('This is NotFoundLayout:-------------------');
+// console.log('pageData:', pageData.value);
+// console.log('frontmatter:', frontmatter.value);
+// console.log('site:', site.value);
 
 const err404 = site.value.theme.err404;
 const errMsg = err404.notFound[Math.random() * err404.notFound.length | 0];

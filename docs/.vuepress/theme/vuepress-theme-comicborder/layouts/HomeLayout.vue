@@ -280,8 +280,8 @@ const pageData = usePageData();
 const matter = usePageFrontmatter();
 const site = useSiteData();
 
-console.log('This is HomeLayout:-------------------');
-console.log('siteData:', site.value);
-console.log('pageData:', pageData.value);
-console.log('frontmatter:', matter.value);
+// console.log('This is HomeLayout:-------------------');
+// console.log('siteData:', site.value);
+// console.log('pageData:', pageData.value);
+// console.log('frontmatter:', matter.value);
 </script>

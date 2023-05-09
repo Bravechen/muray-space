@@ -155,10 +155,10 @@ import Icon from './Icon.vue';
 // import { NIcon, NButton } from 'naive-ui';
 //============================================================
 const siteData = useSiteData();
-console.log(siteData.value.theme.navs);
+// console.log(siteData.value.theme.navs);
 //============================================================
 const navs = ref([]);
 navs.value = siteData.value.theme.navs;
-console.log('navs:', navs);
+// console.log('navs:', navs);
 
 </script>

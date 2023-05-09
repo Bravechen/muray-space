@@ -1,7 +1,6 @@
 <template>
   <Header />
   <main class="page articles-page">
-    <!-- <Content /> -->
     <SideBar />
     <div class="content">
       <ul class="articles">
@@ -25,7 +24,6 @@
 @import '../styles/common.scss';
 
 .articles-page {
-  display: flex;
 
   @include normalPage();
 
@@ -64,10 +62,10 @@ const site = useSiteData();
 const pageData = usePageData();
 const frontmatter = usePageFrontmatter();
 
-console.log('This is ArticlesLayout:-------------------');
-console.log('pageData:', pageData.value);
-console.log('frontmatter:', frontmatter.value);
-console.log('site:', site.value);
+// console.log('This is ArticlesLayout:-------------------');
+// console.log('pageData:', pageData.value);
+// console.log('frontmatter:', frontmatter.value);
+// console.log('site:', site.value);
 
 const articlesData = site.value.articlesData;
 const articles = articlesData.articles;

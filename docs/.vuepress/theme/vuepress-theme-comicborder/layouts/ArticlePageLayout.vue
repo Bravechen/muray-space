@@ -16,7 +16,7 @@ import Footer from '../components/Footer.vue';
 const pageData = usePageData();
 const frontmatter = usePageFrontmatter();
 
-console.log('This is ArticlePageLayout:-------------------');
-console.log('pageData:', pageData.value);
-console.log('frontmatter:', frontmatter.value);
+// console.log('This is ArticlePageLayout:-------------------');
+// console.log('pageData:', pageData.value);
+// console.log('frontmatter:', frontmatter.value);
 </script>

@@ -1,13 +1,13 @@
 <template>
 <div class="category-tools">
   <NTabs type="segment" v-model:value="currentTab" :style="tabsStyle" :tab-style="tabStyle()" >
-    <n-tab-pane name="tags" tab="标签集">
+    <n-tab-pane v-if="widgetOpt.tags" name="tags" tab="标签集">
       <TagsCollect />
     </n-tab-pane>
-    <n-tab-pane name="categories" tab="文章分类">
+    <n-tab-pane v-if="widgetOpt.category" name="categories" tab="文章分类">
       <CategoriesCollect />
     </n-tab-pane>
-    <n-tab-pane name="archives" tab="文章年份归档">
+    <n-tab-pane name="archives" v-if="widgetOpt.archives" tab="文章年份归档">
       <ArchivesCollect />
     </n-tab-pane>
   </NTabs>
@@ -64,6 +64,7 @@ import CategoriesCollect from './CategoriesCollect.vue';
 import ArchivesCollect from './ArchivesCollect.vue';
 //============================================================
 const matter = usePageFrontmatter();
+const widgetOpt = matter.value.widget;
 const tabNames = {
   tags: {
     name: 'tags',
@@ -81,6 +82,7 @@ const tabNames = {
     bgColor: 'var(--theme-color8)',
   }
 };
+
 let firstTab = '';
 for (let key of Object.keys(tabNames)) {
   if (matter.value.widget?.[key] === void 0 || matter.value.widget?.[key] === true ) {
@@ -99,7 +101,6 @@ const tabsStyle = computed(function() {
 });
 
 function tabStyle(...args) {
-  console.log(currentTab.value);
   const tagObj = tabNames[currentTab.value];
   return {
     '--n-tab-text-color-hover': tagObj.color,

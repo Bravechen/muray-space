@@ -16,7 +16,7 @@ import { usePageData, usePageFrontmatter } from '@vuepress/client';
 const pageData = usePageData();
 const frontmatter = usePageFrontmatter();
 
-console.log('This is CategoriesLayout:-------------------');
-console.log('pageData:', pageData.value);
-console.log('frontmatter:', frontmatter.value);
+// console.log('This is CategoriesLayout:-------------------');
+// console.log('pageData:', pageData.value);
+// console.log('frontmatter:', frontmatter.value);
 </script>

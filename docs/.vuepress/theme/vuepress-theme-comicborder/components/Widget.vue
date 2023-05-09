@@ -17,10 +17,10 @@
 
 <style lang="scss">
 .widget-box {
-  flex: 2;
+
   display: flex;
   flex-direction: column;
-
+  width: 25.625rem;
   margin-left: 3.125rem;
   margin-right: 0.625rem;
 
@@ -43,7 +43,7 @@ const Calendar = defineAsyncComponent(() => import('../widget/Calendar.vue'));
 //============================================================
 onErrorCaptured(function (err, ins, info) {
   console.error('widget err====>>', err);
-  console.log('ins====>>', ins);
+  // console.log('ins====>>', ins);
   console.error('info====>>', info);
 });
 

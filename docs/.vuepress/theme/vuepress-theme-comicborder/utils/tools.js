@@ -45,6 +45,6 @@ export function str2unicodeFormate(str) {
  */
 export function unicodeFormate2str(str) {
   let ret = '\\u' + str.replace(/\$\_\$/g, '\\u');
-  console.log(ret);
+  // console.log(ret);
   return new Function(`return '${ret}'`)();
 }

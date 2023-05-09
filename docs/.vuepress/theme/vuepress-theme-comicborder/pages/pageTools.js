@@ -11,6 +11,22 @@ const NAV_PAGES_INDEX_LAYOUTS = {
   defaultLayout: "Layout",
 };
 
+function setPageWidget({ page, app }) {
+  if (!page || !page.frontmatter) {
+    return { page, app };
+  }
+
+  page.frontmatter.widget = {
+    calendar: true,
+    tags: true,
+    category: true,
+    archives: true,
+    ...(page.frontmatter.widget || {})
+  };
+
+  return { page, app };
+}
+
 /**
  * 重置aritcle默认路由对应页面的属性
  * @param {*} param0
@@ -118,7 +134,7 @@ function combineArticleTags({ page, app, article }) {
       articlesData.artTags[tagId] = {
         name: tag,
         id: tagId,
-        link: `/tags?tag=${tagId}`
+        link: `/tags?tag=${encodeURIComponent(tagId)}`
       };
       articlesData.artListByTag[tagId] = [];
     }
@@ -187,7 +203,8 @@ export function combineAndSetPagesData(page, app) {
     combineArticleAchives,
     combineArticleTags,
     combineArticleCategories,
-    filterNavPagesIndexLayout
+    filterNavPagesIndexLayout,
+    setPageWidget
   ].reduce(
     function (prev, fn) {
       return fn(prev);
