@@ -1,17 +1,15 @@
 <template>
   <div class="widget-box">
-    <NSpace vertical size="large">
-      <ClientOnly>
-        <Suspense v-if="widget.calendar">
-          <Calendar />
-          <template #fallback>
-            <CalendarSkeleton />
-          </template>
-        </Suspense>
-      </ClientOnly>
-
+    <ClientOnly>
+      <Suspense v-if="widget.calendar">
+        <Calendar />
+        <template #fallback>
+          <CalendarSkeleton />
+        </template>
+      </Suspense>
+      <br />
       <CategoryTools />
-    </NSpace>
+    </ClientOnly>
   </div>
 </template>
 
@@ -32,14 +30,14 @@
 import { defineAsyncComponent, onErrorCaptured } from 'vue';
 import { usePageFrontmatter } from '@vuepress/client';
 import CalendarSkeleton from '../widget/CalendarSkeleton.vue';
-import CategoryTools from '../widget/CategoryTools.vue';
-import { NSpace } from 'naive-ui';
+// import CategoryTools from '../widget/CategoryTools.vue';
 //============================================================
 const matter = usePageFrontmatter();
 const widget = matter.value.widget;
 //============================================================
 
 const Calendar = defineAsyncComponent(() => import('../widget/Calendar.vue'));
+const CategoryTools = defineAsyncComponent(() => import('../widget/CategoryTools.vue'));
 //============================================================
 onErrorCaptured(function (err, ins, info) {
   console.error('widget err====>>', err);

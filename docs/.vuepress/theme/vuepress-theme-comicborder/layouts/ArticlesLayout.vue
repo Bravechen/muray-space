@@ -13,7 +13,9 @@
           :desc="art.desc"
           :path="art.path" />
       </ul>
-      <Pager v-if="pageTotal > 10" :page-total="pageTotal" :init-page-num="pageNum" />
+      <ClientOnly>
+        <Pager v-if="pageTotal > 10" :page-total="pageTotal" :init-page-num="pageNum" />
+      </ClientOnly>
     </div>
     <Widget />
   </main>
@@ -55,7 +57,9 @@ import Footer from '../components/Footer.vue';
 import SideBar from '../components/SideBar.vue';
 import Widget from '../components/Widget.vue';
 import ArticleItem from '../components/ArticleItem.vue';
-import Pager from '../components/Pager.vue';
+// import Pager from '../components/Pager.vue';
+
+const Pager = defineAsyncComponent(() => import('../components/Pager.vue'));
 
 
 const site = useSiteData();
