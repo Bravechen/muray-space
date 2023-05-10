@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar-box" :class="{ 'hide-calendar': isHide }">
+  <div class="calendar-box" :class="{ 'hide-calendar': isHide }" :style="calendarBoxStyle" >
     <NSwitch class="calendar-toggle" size="large" v-model:value="isHide" :rail-style="railStyle">
       <template #checked-icon>
         <span class="calendar-toggle-icon"></span>
@@ -41,8 +41,9 @@
   overflow: hidden;
 
   &.hide-calendar {
-    width: 66%;
-    margin-left: 34%;
+    width: var(--hide-calendar-width);
+    // margin-left: calc(25.625rem - 19rem); // widget width - hide-calendar width
+    margin-left: calc(var(--widget-width) - var(--hide-calendar-width));
   }
 
   .calendar-toggle {
@@ -55,13 +56,15 @@
         border: var(--theme-border1);
         .n-switch__button {
           border: var(--theme-border1);
+          top: 50%;
+          transform: translateY(-50%);
         }
       }
     }
 
     .calendar-toggle-icon {
-      width: 0.5rem;
-      height: 0.5rem;
+      width: 40%;
+      height: 40%;
       border-radius: 50%;
       box-sizing: border-box;
       border: var(--theme-border1);
@@ -75,7 +78,13 @@
       display: flex;
       align-items: center;
 
+      .n-icon {
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+
       .time-txt {
+        font-size: 0.875rem;
         margin-left: 0.625rem;
       }
     }
@@ -167,6 +176,13 @@ const calendarStyle = computed(function () {
   };
 });
 
+const calendarBoxStyle = computed(function () {
+  return {
+    '--widget-width': '25.625rem',
+    '--hide-calendar-width': '17.5rem',
+  };
+});
+
 // 今天日期
 const currentDate = computed(function () {
   const date = new Date();
@@ -182,7 +198,8 @@ const currentDate = computed(function () {
 // 开关的自定义样式
 const railStyle = function ({ focused, checked }) {
   const style = {
-    '--n-rail-height': '1.875rem',
+    // '--n-rail-height': '1.875rem',
+    '--n-offset': 'calc((24px - 22px) / 2)'
   };
   if (checked) {
     style.background = "var(--theme-color6)";

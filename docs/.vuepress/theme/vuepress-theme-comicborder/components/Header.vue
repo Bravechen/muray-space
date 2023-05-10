@@ -1,7 +1,7 @@
 <template>
   <header class="header">
-    <nav class="navs">
-      <a class="nav" v-for="nav of navs" :class="nav.name" :key="nav.link" :href="nav.link">
+    <nav class="navs" :style="navStyle">
+      <a class="nav" v-for="nav of navs" :class="[ nav.name, { 'active': nav.name === currentPage }]" :key="nav.link" :href="nav.link">
         <Icon class="icon" size="1.2rem" :icon="nav.icon" />
         <span class="txt">{{ nav.text }}</span>
       </a>
@@ -109,6 +109,16 @@
         }
       }
 
+      &.active {
+        .icon {
+          color: var(--active-color);
+        }
+
+        .txt {
+          color: var(--active-color);
+        }
+      }
+
       &:hover {
         // color: var(--theme-color1);
         // background-color: var(--theme-color4);
@@ -133,7 +143,7 @@
           @include navHoverEffect(0, var(--theme-nav-category-hover-color));
         }
 
-        &.archive {
+        &.archives {
           @include navHoverEffect(0, var(--theme-nav-archive-hover-color));
         }
 
@@ -148,7 +158,7 @@
 </style>
 
 <script setup>
-import { ref, h } from 'vue';
+import { ref, computed } from 'vue';
 // import { RouterLink } from 'vue-router';
 import { useSiteData } from '@vuepress/client';
 import Icon from './Icon.vue';
@@ -157,8 +167,28 @@ import Icon from './Icon.vue';
 const siteData = useSiteData();
 // console.log(siteData.value.theme.navs);
 //============================================================
+const props = defineProps({
+  currentPage: {
+    type: String,
+    default: ''
+  }
+});
+//============================================================
 const navs = ref([]);
 navs.value = siteData.value.theme.navs;
 // console.log('navs:', navs);
-
+const navStyle = computed(function() {
+  const navActiveColors = {
+    home: `var(--theme-nav-home-hover-color)`,
+    tags: `var(--theme-nav-tags-hover-color)`,
+    category: `var(--theme-nav-category-hover-color)`,
+    archives: `var(--theme-nav-archive-hover-color)`,
+    about: `var(--theme-nav-about-hover-color)`,
+    default: `var(--theme-color2)`,
+  };
+  return {
+    '--active-color': navActiveColors[props.currentPage] || navActiveColors.default,
+    opacity: 1,
+  };
+});
 </script>

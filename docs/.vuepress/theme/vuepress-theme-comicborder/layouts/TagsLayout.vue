@@ -1,11 +1,13 @@
 <template>
-  <Header />
+  <Header current-page="tags" />
   <main class="page tags-page">
     <SideBar />
     <div class="content">
       <div class="tags-box" @click="onTagListClick">
         <ClientOnly>
-          <TagSelector @switch:changed="onSwitchTag" :current-tag="currentTag" :tag-list="tagList" />
+          <TagSelector @switch:changed="onSwitchTag" title="标签" :current-item="currentTag" :item-list="tagList">
+            <template #title-txt>打来打去，打标签：</template>
+          </TagSelector>
         </ClientOnly>
       </div>
 
@@ -15,7 +17,7 @@
         </ClientOnly>
       </template>
       <div v-else class="empty-list">
-        <span>兄弟姐妹，等着你选择一个标签呢 ....φ(︶▽︶)φ....</span>
+        <span>兄弟姐妹，等着您选择一个标签呢 ....φ(︶▽︶)φ....</span>
       </div>
     </div>
     <Widget />
@@ -34,11 +36,7 @@
     align-items: flex-start;
     height: auto;
 
-    box-sizing: border-box;
-    border-radius: var(--theme-border-radius1);
-    border: var(--theme-border1);
-    box-shadow: var(--theme-shadow-color1);
-    padding: var(--theme-container-padding1);
+    @include themeContainer();
 
     .tags-box {
       display: flex;
@@ -75,11 +73,11 @@ import SideBar from '../components/SideBar.vue';
 import Widget from '../components/Widget.vue';
 import { tagStyles } from '../constant/tagStyle';
 
-const TagSelector = defineAsyncComponent(() => import('../components/TagSelector.vue'));
+const TagSelector = defineAsyncComponent(() => import('../components/ItemSelector.vue'));
 const ArticleList = defineAsyncComponent(() => import('../components/ArticleList.vue'));
 
-const pageData = usePageData();
-const frontmatter = usePageFrontmatter();
+// const pageData = usePageData();
+// const frontmatter = usePageFrontmatter();
 const site = useSiteData();
 const route = useRoute();
 
@@ -110,9 +108,9 @@ const artList = ref([]);
 
 // ui 事件
 const uiEvents = {
-  selectTag(data) {
-    const { tagId } = data;
-    combineArtList(tagId);
+  selectItem(data) {
+    const { itemId } = data;
+    combineArtList(itemId);
   }
 };
 
@@ -183,8 +181,6 @@ function onSwitchTag(value) {
 
   }
 }
-
-
 
 /**
  * 从URL中获取tagId，优先hash，其次是query

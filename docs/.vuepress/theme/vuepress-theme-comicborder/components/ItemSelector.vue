@@ -1,21 +1,28 @@
 <template>
-  <div class="wrapper" v-show="!currentTag.id">
-    <h4>打来打去，打标签：</h4>
-    <NSpace class="tag-list">
-      <NTag v-for="tag of tagList" :key="tag.id" :color="tag.color"><span class="tag-cnt" data-type="selectTag"
-          :data-tag-id="tag.id">{{ tag.name }} 共 {{ tag.artSum }}篇</span></NTag>
+  <div class="wrapper" v-show="!currentItem.id">
+    <h4><slot name="title-txt"></slot></h4>
+    <NSpace class="item-list">
+      <NTag
+        v-for="item of itemList"
+        :key="item.id"
+        :color="item.color">
+        <span
+          class="item-cnt"
+          data-type="selectItem"
+          :data-item-id="item.id">{{ item.name }} 共 {{ item.artSum }}篇</span>
+      </NTag>
     </NSpace>
   </div>
-  <h3 v-if="!!currentTag.id" class="current-tag">
-    <span class="current-tag-name">标签&nbsp;&nbsp;<em>{{ currentTag.name }}</em>&nbsp;&nbsp;下的文章:</span>
-    <n-switch class="toggle-tags" size="large" @update:value="onSwitchTag" :default-value="true" :rail-style="railStyle">
+  <h3 v-if="!!currentItem.id" class="current-item">
+    <span class="current-item-name">{{ title }}&nbsp;&nbsp;<em>{{ currentItem.name }}</em>&nbsp;&nbsp;下的文章:</span>
+    <n-switch class="toggle-items" size="large" @update:value="onSwitchItem" :default-value="true" :rail-style="railStyle">
       <template #checked-icon>
         <span class="toggle-icon"></span>
       </template>
       <template #unchecked-icon>
         <span class="toggle-icon"></span>
       </template>
-      <template #checked><span class="checked-txt">换一个标签</span></template>
+      <template #checked><span class="checked-txt">换一个{{ title }}</span></template>
       <template #unchecked><span class="unchecked-txt">预备...</span></template>
     </n-switch>
   </h3>
@@ -29,22 +36,22 @@
 
   }
 
-  .tag-list {
+  .item-list {
     width: 100%;
     margin-bottom: 1.25rem;
 
-    .tag-cnt {
+    .item-cnt {
       cursor: pointer;
     }
   }
 }
 
-.current-tag {
+.current-item {
   display: flex;
   align-items: center;
   width: 100%;
 
-  .current-tag-name {
+  .current-item-name {
     flex: 1;
     font-weight: normal;
     font-size: 0.875rem;
@@ -57,7 +64,7 @@
     }
   }
 
-  .toggle-tags {
+  .toggle-items {
     &.n-switch {
       .n-switch__rail {
         box-sizing: border-box;
@@ -65,6 +72,8 @@
 
         .n-switch__button {
           border: var(--theme-border1);
+          top: 50%;
+          transform: translateY(-50%);
         }
       }
     }
@@ -80,11 +89,13 @@
     .checked-txt {
       color: var(--theme-color1);
       font-weight: normal;
+      font-size: 0.875rem;
     }
 
     .unchecked-txt {
       font-weight: normal;
       color: var(--theme-color2);
+      font-size: 0.875rem;
     }
   }
 }
@@ -94,30 +105,35 @@
 
 
 const props = defineProps({
-  currentTag: {
+  currentItem: {
     type: Object,
     default() {
       return {};
     }
   },
-  tagList: {
+  itemList: {
     type: Array,
     default() {
       return [];
     }
+  },
+  title: {
+    type: String,
+    default: '项'
   }
 });
 
 const emits = defineEmits(['switch:changed']);
 
-function onSwitchTag(value) {
+function onSwitchItem(value) {
   emits('switch:changed', value);
 }
 
 // 开关的自定义样式
 const railStyle = function ({ focused, checked }) {
   const style = {
-    '--n-rail-height': '1.875rem',
+    // '--n-rail-height': '1.875rem',
+    '--n-offset': 'calc((24px - 22px) / 2)'
   };
   if (checked) {
     style.background = "var(--theme-color6)";

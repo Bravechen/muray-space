@@ -162,7 +162,7 @@ function combineArticleCategories({ page, app, article }) {
     category = {
       name: categoryName,
       id: categoryId,
-      link: `/categories?category=${categoryId}`
+      link: `/categories?category=${encodeURIComponent(categoryId)}`
     };
     articlesData.artCategories[categoryId] = category;
     articlesData.artListByCategory[categoryId] = [];

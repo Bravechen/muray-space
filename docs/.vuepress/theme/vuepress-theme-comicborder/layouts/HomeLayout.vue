@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header current-page="home" />
   <main class="page home-page">
     <div class="sec1">
       <section class="bg-box">

@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header  current-page="articles" />
   <main class="page articles-page">
     <SideBar />
     <div class="content">

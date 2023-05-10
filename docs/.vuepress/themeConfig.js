@@ -93,7 +93,7 @@ export default comicborderTheme({
       text: '归档',
       link: '/archives/',
       icon: 'icon-archive',
-      name: 'archive'
+      name: 'archives'
     },
     {
       text: '标签',
