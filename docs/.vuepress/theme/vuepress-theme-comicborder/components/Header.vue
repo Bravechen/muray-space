@@ -24,6 +24,8 @@
   box-sizing: border-box;
   padding: var(--theme-nav-box-padding1);
 
+  pointer-events: none;
+
   .navs {
     display: flex;
     align-items: center;
@@ -39,6 +41,8 @@
     border-radius: var(--theme-border-radius1);
     padding: var(--theme-navbar-padding1);
     box-shadow: var(--theme-shadow-color1);
+
+    pointer-events: all;
 
     .nav {
       display: flex;

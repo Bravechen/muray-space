@@ -1,7 +1,15 @@
-import { chalk } from '@vuepress/utils';
+import chalk from 'chalk';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { filterNavPagesIndexLayout, filterArtPagesLayout, combineAndSetPagesData } from './pages/pageTools.js';
+import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
+
+import { tipContainerPlugins, specContainerPlugins, codeContainerPlugins } from './plugins/containerPlugins.js';
+import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
+import { prismjsPlugin } from '@vuepress/plugin-prismjs';
+import { supperls } from './plugins/languagePlugin.js';
+import { lineNumberPlugin } from './plugins/lineNumberPlugin/index.js';
+import { highlightLinePlugin } from './plugins/hightlightLinePlugin/index.js';
 //============================================================
 // 插件目录
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -65,7 +73,34 @@ export const comicborderTheme = (clientThemeOpt, ...args) => {
 
       // 使用插件
       plugins: [
-
+        backToTopPlugin(),
+        //-------------------- tip container --------------------
+        ...tipContainerPlugins,
+        //-------------------- spec container --------------------
+        ...specContainerPlugins,
+        //-------------------- code container --------------------
+        ...codeContainerPlugins,
+        registerComponentsPlugin({
+          components: {
+            'codegroup': path.resolve(__dirname, './global-components/CodeGroup.vue'),
+            'codegroupitem': path.resolve(__dirname, './global-components/CodeGroupItem.vue'),
+            'Badge': path.resolve(__dirname, './global-components/Badge.vue'),
+          }
+        }),
+        //-------------------- prismjs --------------------
+        prismjsPlugin({
+          // 配置项
+          preloadLanguages: [
+            ...supperls
+          ],
+        }),
+        //-------------------- line number --------------------
+        lineNumberPlugin({
+          // 配置项
+        }),
+        highlightLinePlugin({
+          // 配置项
+        })
       ],
 //-------------------- dev cycle --------------------
       extendsPageOptions(pageOpt, app) {
@@ -90,7 +125,7 @@ export const comicborderTheme = (clientThemeOpt, ...args) => {
       },
       // 文件准备完毕，用户client配置也准备好了
       onPrepared(app) {
-        debugger;
+        // debugger;
         // console.log('pages:', app.pages);
 
       },

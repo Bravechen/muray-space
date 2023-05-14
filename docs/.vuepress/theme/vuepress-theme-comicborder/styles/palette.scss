@@ -19,13 +19,14 @@
   --bg-color2: #f9f9f9;
 
   // tips color
-  --tip-info-color: #A0C3D9;
+  --tip-info-color: #a0c3d92b;
   --tip-info-font-color: #0388A6;
   --tip-success-bg-color: #9ab59e;
   --tip-success-font-color: #5e8c65;
-  --tip-warning-bg-color: #f2d16d;
-  --tip-warning-font-color: #BF7E06;
-  --tip-error-bg-color: #f2cbc4;
+  --tip-warning-bg-color: #f2d16d6f;
+  --tip-warning-font-color: #F2B705;
+  --tip-warning-font-color2:#BF7E06;
+  --tip-error-bg-color: #f2cbc470;
   --tip-error-font-color: #a6523f;
 
   // border color
@@ -67,4 +68,10 @@
   --theme-nav-archive-hover-color: #5e8c65;
   --theme-nav-about-hover-color: #a6523f;
   --theme-nav-tags-hover-color: #024959;
+
+  // code
+  --theme-code-bg-color1: #2d2d2d;
+  --theme-code-bg-color2: #404040;
+  --theme-code-bg-color3: #666666;
+  --theme-code-font-color1: #c6c6c6;
 }

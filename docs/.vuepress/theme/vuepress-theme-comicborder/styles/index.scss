@@ -1,6 +1,8 @@
 @use "fns";
 @import './common.scss';
 @import './skeleton.scss';
+@import './prism.css';
+@import './markdown.scss';
 
 :root {
   font-size: calc(16 * 100vw / 1920); // 以1920为基础全屏宽度，16px为基础字体大小
@@ -32,4 +34,12 @@ ul, li  {
   list-style: none;
 }
 
+/****************************************************************/
+/* @vuepress/plugin-back-to-top@next */
+// :root {
+//   --back-to-top-z-index: 5;
 
+//   --back-to-top-color: #3eaf7c;
+//   --back-to-top-color-hover: #71cda3;
+// }
+/****************************************************************/

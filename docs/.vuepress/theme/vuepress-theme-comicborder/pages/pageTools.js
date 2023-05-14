@@ -45,6 +45,29 @@ function resetArticleIndex({ page, app }) {
   return { page, app };
 }
 
+function setArticlePageMatter({ page, app }) {
+
+  if (!page || !page.frontmatter) {
+    return { page, app };
+  }
+
+  if (page.frontmatter.avatar === void 0) {
+    page.frontmatter.avatar = true;
+  }
+
+  const widget = page.frontmatter.widget || {};
+
+  page.frontmatter.widget = {
+    calendar: true,
+    tags: true,
+    category: true,
+    archives: true,
+    ...widget,
+  };
+
+  return { page, app };
+}
+
 /**
  * 合成文章页面数据
  * @param {*} param0
@@ -198,6 +221,7 @@ export function filterNavPagesIndexLayout({ page, app }) {
 export function combineAndSetPagesData(page, app) {
   return [
     resetArticleIndex,
+    setArticlePageMatter,
     combineArticle,
     combineArtList,
     combineArticleAchives,
@@ -219,8 +243,10 @@ export function combineAndSetPagesData(page, app) {
  * @param {*} artDir
  */
 export function filterArtPagesLayout(pageOpt, artDir) {
+  // debugger;
   if (pageOpt.filePath?.startsWith(artDir) && !pageOpt.frontmatter?.articles) {
     pageOpt.frontmatter = pageOpt.frontmatter ?? {};
     pageOpt.frontmatter.articlePage = true;
+    pageOpt.frontmatter.layout =  NAV_PAGES_INDEX_LAYOUTS['articlePage'];
   }
 }
