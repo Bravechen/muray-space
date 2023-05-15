@@ -16,13 +16,16 @@
     "@vicons/carbon": "^0.12.0",
     "@vicons/ionicons5": "^0.12.0",
     "@vuepress/client": "2.0.0-beta.62",
+    "@vuepress/plugin-active-header-links": "2.0.0-beta.62",
     "@vuepress/plugin-back-to-top": "2.0.0-beta.62",
     "@vuepress/plugin-container": "2.0.0-beta.62",
     "@vuepress/plugin-docsearch": "2.0.0-beta.62",
+    "@vuepress/plugin-git": "2.0.0-beta.62",
     "@vuepress/plugin-medium-zoom": "2.0.0-beta.62",
     "@vuepress/plugin-prismjs": "2.0.0-beta.62",
     "@vuepress/plugin-register-components": "2.0.0-beta.62",
     "@vuepress/plugin-search": "2.0.0-beta.62",
+    "@vuepress/plugin-toc": "2.0.0-beta.62",
     "@vuepress/utils": "2.0.0-beta.62",
     "chalk": "^5.2.0",
     "naive-ui": "^2.34.3",
@@ -31,7 +34,8 @@
     "vfonts": "^0.0.3",
     "vue": "^3.3.2",
     "vue-router": "^4.2.0",
-    "vuepress": "2.0.0-beta.62"
+    "vuepress": "2.0.0-beta.62",
+    "vuepress-plugin-md-enhance": "2.0.0-beta.210"
   },
   "dependencies": {
     "lodash": "^4.17.21"

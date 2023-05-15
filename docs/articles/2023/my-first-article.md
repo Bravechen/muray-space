@@ -81,10 +81,9 @@ let c = "abc";
 
 渲染出来是这样的：
 
-
-- <Badge type="tip" text="^o^" vertical="middle" /> 
-- <Badge type="warning" text="=.=" vertical="top" /> 
-- <Badge type="danger" text="-_-|||" vertical="bottom" />
+- 这是提示文字 垂直居中对齐 - <Badge type="tip" text="呵呵 ^o^" vertical="middle" /> 
+- 这是一段需要注意的文字 顶对齐 - <Badge type="warning" text="额 =.=" vertical="top" /> 
+- 这是一段需要警告的文字 底对齐 - <Badge type="danger" text="这个嘛... -_-|||" vertical="bottom" />
 
 ## 自定义容器，也是简单好用
 
@@ -150,18 +149,27 @@ let c = "abc";
 
 ### 列表
 
-无序列表：
+#### 无序列表：
 
 - 春花秋月何时了，往事知多少
 - 朝辞白帝彩云间，千里江陵一日还
 - 沉舟侧畔千帆过，病树前头万木春
 - 春蚕到死丝方尽，蜡炬成灰泪始干
 
-有序列表：
+#### 无序列表分级
+
+- 列表一级
+  - 列表二级
+    - 列表三级
+      - 列表四级
+        - 列表五级
+
+### 有序列表：
 
 1. 昨夜西风凋碧树，独上高楼，望尽天涯路
 2. 衣带渐宽终不悔，为伊消得人憔悴
 3. 众里寻他千百度过，蓦然回首，那人却在灯火阑珊处。
+
 
 ### 表格
 
@@ -176,6 +184,13 @@ let c = "abc";
 ![image](/assets/beach-g8153c8171_640.jpg)
 ### 链接
 
+[这是一个链接](https://muray.xyz)
+
+### 选项列表
+
+- [ ] Plan A
+- [x] Plan B
+
 ### 公式
 
 行内:
@@ -186,8 +201,3 @@ Euler's identity $e^{i\pi}+1=0$ is a beautiful formula in $\mathbb{R}^2$.
 
 $$\frac {\partial^r} {\partial \omega^r} \left(\frac {y^{\omega}} {\omega}\right) 
 = \left(\frac {y^{\omega}} {\omega}\right) \left\{(\log y)^r + \sum_{i=1}^r \frac {(-1)^i r \cdots (r-i+1) (\log y)^{r-i}} {\omega^i} \right\}$$
-
-一些约定
-markdown 文件中的 TeX 语法将遵循 pandoc 制定的准则：
-
-两个 $ 之间的任何内容都将被视为 TeX 语法。开头的 $ 必须在其右边有一个非空格字符，而结尾的 $ 必须在其左边有一个非空格字符，并且不能立即跟随一个数字。因此 $20,000 和 $30,000 将不会解析为 TeX。如果由于某种原因你需要将文本置于 $ 字符中，则使用反斜杠转义它们即可。

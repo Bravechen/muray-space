@@ -10,6 +10,10 @@ import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { supperls } from './plugins/languagePlugin.js';
 import { lineNumberPlugin } from './plugins/lineNumberPlugin/index.js';
 import { highlightLinePlugin } from './plugins/hightlightLinePlugin/index.js';
+import { gitPlugin } from '@vuepress/plugin-git';
+import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links';
+import { tocPlugin } from '@vuepress/plugin-toc';
+import { mdEnhancePlugin } from "vuepress-plugin-md-enhance";
 //============================================================
 // 插件目录
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -100,6 +104,25 @@ export const comicborderTheme = (clientThemeOpt, ...args) => {
         }),
         highlightLinePlugin({
           // 配置项
+        }),
+        //-------------------- git --------------------
+        gitPlugin({
+          // 配置项
+        }),
+        //-------------------- active header links --------------------
+        activeHeaderLinksPlugin({
+          // 配置项
+        }),
+        //-------------------- mdEnhuance --------------------
+        mdEnhancePlugin({
+          // Enable Tex Support using katex
+          katex: true,
+          // Enable Task List
+          tasklist: true,
+        }),
+        //-------------------- toc --------------------
+        tocPlugin({
+
         })
       ],
 //-------------------- dev cycle --------------------
