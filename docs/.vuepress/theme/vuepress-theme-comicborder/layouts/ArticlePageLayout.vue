@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header show-info />
   <main class="page article-page">
     <article class="content" >
       <section class="article-info">
@@ -47,7 +47,7 @@ $icon-size: 1rem;
     @include pageContent();
     align-items: flex-start;
     height: auto;
-    margin-left: 1.875rem;
+    margin-left: 1.5rem;
 
     @include themeContainer();
 
@@ -145,7 +145,7 @@ $icon-size: 1rem;
 </style>
 
 <script setup>
-import { usePageData, usePageFrontmatter } from '@vuepress/client';
+import { usePageData, usePageFrontmatter, useSiteData } from '@vuepress/client';
 import { CalendarOutline } from '@vicons/ionicons5';
 import { Time } from '@vicons/carbon';
 import Header from '../components/Header.vue';
@@ -155,8 +155,10 @@ import Widget from '../components/Widget.vue';
 
 const pageData = usePageData();
 const matter = usePageFrontmatter();
+const site = useSiteData();
 
-// console.log('This is ArticlePageLayout:-------------------');
-// console.log('pageData:', pageData.value);
-// console.log('frontmatter:', matter.value);
+console.log('This is ArticlePageLayout:-------------------');
+console.log('pageData:', pageData.value);
+console.log('frontmatter:', matter.value);
+console.log('site:', site.value);
 </script>

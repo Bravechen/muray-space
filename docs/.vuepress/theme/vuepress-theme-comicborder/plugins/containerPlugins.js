@@ -72,7 +72,7 @@ export function centerContainer() {
   return [
     containerPlugin({
         type: 'center',
-        before: info => `<div class="center-container">`,
+        before: info => `<div class="center-container">${info ? `<em class="center-title">${info}</em>` : '' }`,
         after: () => '</div>',
         defaultTitle: {
           '/': '居中',

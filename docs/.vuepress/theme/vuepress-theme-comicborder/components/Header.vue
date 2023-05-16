@@ -1,7 +1,17 @@
 <template>
   <header class="header">
+    <template v-if="showInfo">
+      <div class="site-info">
+        <div class="avatar"><img src="" alt=""></div>
+        <div class="info"></div>
+        <div class="social-list"></div>
+      </div>
+      <div class="place"></div>
+    </template>
+
     <nav class="navs" :style="navStyle">
-      <a class="nav" v-for="nav of navs" :class="[ nav.name, { 'active': nav.name === currentPage }]" :key="nav.link" :href="nav.link">
+      <a class="nav" v-for="nav of navs" :class="[nav.name, { 'active': nav.name === currentPage }]" :key="nav.link"
+        :href="nav.link">
         <Icon class="icon" size="1.2rem" :icon="nav.icon" />
         <span class="txt">{{ nav.text }}</span>
       </a>
@@ -10,6 +20,8 @@
 </template>
 
 <style lang="scss">
+@import '../styles/common.scss';
+
 .header {
   display: flex;
   align-items: center;
@@ -58,6 +70,7 @@
       font-weight: var(--theme-font-bold);
 
       position: relative;
+
       &::before {
         content: '';
         display: inline-block;
@@ -158,6 +171,24 @@
 
     }
   }
+
+  .site-info {
+    display: flex;
+    align-items: center;
+
+    min-width: 20%;
+    height: 4rem;
+
+    @include themeContainer();
+
+    padding: 0.5rem 1.5rem;
+    background-color: var(--theme-color1);
+  }
+
+  .place {
+    flex: 1;
+    pointer-events: none;
+  }
 }
 </style>
 
@@ -175,13 +206,17 @@ const props = defineProps({
   currentPage: {
     type: String,
     default: ''
+  },
+  showInfo: {
+    type: Boolean,
+    default: false
   }
 });
 //============================================================
 const navs = ref([]);
 navs.value = siteData.value.theme.navs;
 // console.log('navs:', navs);
-const navStyle = computed(function() {
+const navStyle = computed(function () {
   const navActiveColors = {
     home: `var(--theme-nav-home-hover-color)`,
     tags: `var(--theme-nav-tags-hover-color)`,
