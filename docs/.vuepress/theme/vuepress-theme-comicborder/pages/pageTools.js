@@ -88,6 +88,8 @@ function combineArticle({ page, app }) {
     updateDate: page.frontmatter.updateDate,
     id: page.key,
     coverImg: page.frontmatter.coverImg || "",
+    tagIds: [],
+    categoryIds: [],
   };
 
   return { page, app, article };
@@ -162,6 +164,7 @@ function combineArticleTags({ page, app, article }) {
       articlesData.artListByTag[tagId] = [];
     }
     articlesData.artListByTag[tagId].push(article.id);
+    article.tagIds.push(tagId);
   }
 
   return { page, app, article };
@@ -191,6 +194,7 @@ function combineArticleCategories({ page, app, article }) {
     articlesData.artListByCategory[categoryId] = [];
   }
   articlesData.artListByCategory[categoryId].push(article.id);
+  article.categoryIds.push(categoryId);
 
   return { page, app, article };
 }

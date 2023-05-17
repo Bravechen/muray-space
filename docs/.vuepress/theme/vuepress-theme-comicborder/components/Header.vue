@@ -2,9 +2,15 @@
   <header class="header">
     <template v-if="showInfo">
       <div class="site-info">
-        <div class="avatar"><img src="" alt=""></div>
-        <div class="info"></div>
-        <div class="social-list"></div>
+        <div class="avatar"><img :src="avatar" alt=""></div>
+        <div class="info">
+          <em>{{ siteTitle }}</em>
+        </div>
+        <div class="social-list">
+          <a v-for="nav of socialList" :key="nav.link" :href="nav.link" class="item" :title="nav.title">
+            <Icon :icon="nav.icon" :size="nav.iconSize || '1.5rem'" />
+          </a>
+        </div>
       </div>
       <div class="place"></div>
     </template>
@@ -183,6 +189,49 @@
 
     padding: 0.5rem 1.5rem;
     background-color: var(--theme-color1);
+
+    pointer-events: all;
+
+    .avatar {
+      display: inline-block;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 0.5rem;
+
+      @include img();
+    }
+
+    .info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      & > em {
+        font-style: normal;
+        font-weight: var(--theme-font-bold);
+      }
+    }
+
+    .social-list {
+      display: inline-block;
+
+      @include themeContainer();
+      padding: 0.5rem 1rem;
+      background-color: var(--theme-color6);
+
+      & > .item {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 0.625rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
   }
 
   .place {
@@ -210,6 +259,22 @@ const props = defineProps({
   showInfo: {
     type: Boolean,
     default: false
+  },
+  avatar: {
+    type: String,
+    default: ''
+  },
+  socialList: {
+    type: Array,
+    default: () => []
+  },
+  siteTitle: {
+    type: String,
+    default: ''
+  },
+  subTitle: {
+    type: String,
+    default: ''
   }
 });
 //============================================================

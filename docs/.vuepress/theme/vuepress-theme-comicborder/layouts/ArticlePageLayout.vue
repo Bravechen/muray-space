@@ -1,5 +1,5 @@
 <template>
-  <Header show-info />
+  <Header :avatar="theme.logo" :social-list="theme.socials" :site-title="site.title" show-info />
   <main class="page article-page">
     <article class="content" >
       <section class="article-info">
@@ -23,9 +23,16 @@
       <div class="category-tag">
         <div class="art-categories">
           <span class="title-txt">分类：</span>
+          <NTag class="category" v-for="(category, index) in categoryList" :key="category.id" :color="tagColor(index)">
+            <a :href="category.link" class="link-item">{{ category.name }}</a>
+          </NTag>
+
         </div>
         <div class="art-tags">
           <span class="tags">标签：</span>
+          <NTag class="tag-item" v-for="(tag, index) in tagList" :key="tag.id" :color="tagColor(index)">
+            <a class="link-item" :href="tag.link">{{ tag.name }}</a>
+          </NTag>
         </div>
       </div>
       <div></div>
@@ -140,6 +147,32 @@ $icon-size: 1rem;
         }
       }
     }
+
+    .category-tag {
+
+      .art-categories {
+        margin-bottom: 0.75rem;
+        .category {
+          margin-right: 0.625rem;
+
+          .link-item {
+            color: inherit;
+          }
+        }
+      }
+
+      .art-tags {
+        display: flex;
+        align-items: center;
+
+        .tag-item {
+          margin-right: 0.625rem;
+          .link-item {
+            color: inherit;
+          }
+        }
+      }
+    }
   }
 }
 </style>
@@ -151,6 +184,8 @@ import { Time } from '@vicons/carbon';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import Widget from '../components/Widget.vue';
+import { tagStyles } from '../constant/tagStyle';
+import { NTag } from 'naive-ui';
 
 
 const pageData = usePageData();
@@ -161,4 +196,35 @@ console.log('This is ArticlePageLayout:-------------------');
 console.log('pageData:', pageData.value);
 console.log('frontmatter:', matter.value);
 console.log('site:', site.value);
+
+const theme = site.value.theme;
+const tags = site.value.articlesData.artTags;
+const categories = site.value.articlesData.artCategories;
+const pageId = pageData.value.key;
+const article = site.value.articlesData.articles[pageId];
+
+const tagList = computed(function() {
+  return article.tagIds.map(function(tagId) {
+    const tag = tags[tagId];
+    return {
+      ...tag,
+    };
+  });
+});
+
+const categoryList = computed(function() {
+  return article.categoryIds.map(function(categoryId) {
+    const category = categories[categoryId];
+    return {
+      ...category,
+    };
+  });
+});
+
+function tagColor(index) {
+  return {
+    ...tagStyles[index % tagStyles.length],
+  };
+}
+
 </script>

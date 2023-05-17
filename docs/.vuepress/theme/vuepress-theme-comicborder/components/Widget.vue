@@ -10,6 +10,7 @@
       <br />
       <CategoryTools />
     </ClientOnly>
+    <ArtCntNav />
   </div>
 </template>
 
@@ -30,6 +31,7 @@
 import { defineAsyncComponent, onErrorCaptured } from 'vue';
 import { usePageFrontmatter } from '@vuepress/client';
 import CalendarSkeleton from '../widget/CalendarSkeleton.vue';
+import ArtCntNav from '../widget/ArtCntNav.vue';
 // import CategoryTools from '../widget/CategoryTools.vue';
 //============================================================
 const matter = usePageFrontmatter();
