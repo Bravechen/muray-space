@@ -6,6 +6,7 @@
   --markdown-font-color3: #cccccc;
   --markdown-font-color4: #333333;
   --markdown-font-color5: #3b444a;
+  --markdown-font-color6: #0388A6;
 
   --md-bg-color1: #f2f2f2;
 
@@ -426,8 +427,8 @@
   }
 }
 //------------------- img ------------------
-.theme-markdown {
 
+.theme-markdown {
   p {
     img {
       max-width: 100%;
@@ -683,6 +684,77 @@
       font-size: 14px;
       color: var(--markdown-font-color5);
       line-height: 1.5;
+    }
+  }
+}
+//------------------ toc ------------------
+.vuepress-toc {
+  .vuepress-toc-list {
+    .vuepress-toc-item {
+      a {
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 0.25rem 0.5rem;
+
+        font-size: 0.875rem;
+        color: var(--markdown-font-color5);
+        text-decoration: none;
+        transition: color 0.3s;
+
+        position: relative;
+
+        &:hover {
+          // color: var(--markdown-font-color6);
+          color: white;
+          &::before {
+            background-color: var(--md-task-item-bg);
+            width: 100%;
+          }
+        }
+
+        &::before {
+          content: '';
+          display: block;
+          width: 0%;
+          height: 100%;
+
+          box-sizing: border-box;
+          border-radius: 3px;
+
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: -1;
+
+          background-color: transparent;
+
+          transition-property: width;
+          transition-duration: 0.2s;
+          // transition-delay: 0.3s;
+          transition-timing-function: ease;
+
+        }
+      }
+    }
+  }
+
+  & > .vuepress-toc-list {
+
+    list-style: disc;
+
+    & > .vuepress-toc-item {
+
+      list-style: disc inside;
+
+      & > .vuepress-toc-list {
+        box-sizing: border-box;
+        padding-left: 1.5rem;
+
+        & > .vuepress-toc-item {
+          list-style: circle inside;
+
+        }
+      }
     }
   }
 }

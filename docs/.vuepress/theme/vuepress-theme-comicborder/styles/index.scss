@@ -36,10 +36,34 @@ ul, li  {
 
 /****************************************************************/
 /* @vuepress/plugin-back-to-top@next */
-// :root {
-//   --back-to-top-z-index: 5;
+:root {
+  --back-to-top-z-index: 5;
 
-//   --back-to-top-color: #3eaf7c;
-//   --back-to-top-color-hover: #71cda3;
+  --back-to-top-color: #5e8c65;
+  --back-to-top-color-hover: #9ab59e;
+}
+
+// .back-to-top {
+//   width: 2.25rem;
+//   height: 2.25rem;
+
+//   // @include themeContainer();
+
+//   // border-radius: 50%;
+
+//   &::after {
+//     content: '';
+//     width: 2.25rem;
+//     height: 2.25rem;
+//     overflow: hidden;
+
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     z-index: 100;
+
+//     @include themeContainer();
+//     border-radius: 50%;
+//   }
 // }
 /****************************************************************/

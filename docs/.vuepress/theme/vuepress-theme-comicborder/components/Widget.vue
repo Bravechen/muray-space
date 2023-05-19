@@ -9,8 +9,8 @@
       </Suspense>
       <br />
       <CategoryTools />
+      <ArtCntNav />
     </ClientOnly>
-    <ArtCntNav />
   </div>
 </template>
 
@@ -31,7 +31,7 @@
 import { defineAsyncComponent, onErrorCaptured } from 'vue';
 import { usePageFrontmatter } from '@vuepress/client';
 import CalendarSkeleton from '../widget/CalendarSkeleton.vue';
-import ArtCntNav from '../widget/ArtCntNav.vue';
+// import ArtCntNav from '../widget/ArtCntNav.vue';
 // import CategoryTools from '../widget/CategoryTools.vue';
 //============================================================
 const matter = usePageFrontmatter();
@@ -40,6 +40,7 @@ const widget = matter.value.widget;
 
 const Calendar = defineAsyncComponent(() => import('../widget/Calendar.vue'));
 const CategoryTools = defineAsyncComponent(() => import('../widget/CategoryTools.vue'));
+const ArtCntNav = defineAsyncComponent(() => import('../widget/ArtCntNav.vue'));
 //============================================================
 onErrorCaptured(function (err, ins, info) {
   console.error('widget err====>>', err);

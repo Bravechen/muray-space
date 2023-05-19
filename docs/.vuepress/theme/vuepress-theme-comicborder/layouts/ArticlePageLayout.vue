@@ -20,21 +20,18 @@
         <div class="pic"><img :src="matter.coverImg" alt="" /></div>
       </section>
       <Content class="article-cnt theme-markdown" />
-      <div class="category-tag">
-        <div class="art-categories">
-          <span class="title-txt">分类：</span>
-          <NTag class="category" v-for="(category, index) in categoryList" :key="category.id" :color="tagColor(index)">
-            <a :href="category.link" class="link-item">{{ category.name }}</a>
-          </NTag>
-
+      <ClientOnly>
+        <div class="category-tag">
+          <div class="art-categories">
+            <span class="title-txt">分类：</span>
+            <TagList :item-list="categoryList" />
+          </div>
+          <div class="art-tags">
+            <span class="tags">标签：</span>
+            <TagList :item-list="tagList" />
+          </div>
         </div>
-        <div class="art-tags">
-          <span class="tags">标签：</span>
-          <NTag class="tag-item" v-for="(tag, index) in tagList" :key="tag.id" :color="tagColor(index)">
-            <a class="link-item" :href="tag.link">{{ tag.name }}</a>
-          </NTag>
-        </div>
-      </div>
+      </ClientOnly>
       <div></div>
     </article>
     <Widget />
@@ -152,25 +149,11 @@ $icon-size: 1rem;
 
       .art-categories {
         margin-bottom: 0.75rem;
-        .category {
-          margin-right: 0.625rem;
-
-          .link-item {
-            color: inherit;
-          }
-        }
       }
 
       .art-tags {
         display: flex;
         align-items: center;
-
-        .tag-item {
-          margin-right: 0.625rem;
-          .link-item {
-            color: inherit;
-          }
-        }
       }
     }
   }
@@ -184,8 +167,8 @@ import { Time } from '@vicons/carbon';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import Widget from '../components/Widget.vue';
-import { tagStyles } from '../constant/tagStyle';
-import { NTag } from 'naive-ui';
+
+const TagList = defineAsyncComponent(() => import('../components/TagList.vue'));
 
 
 const pageData = usePageData();
@@ -221,10 +204,6 @@ const categoryList = computed(function() {
   });
 });
 
-function tagColor(index) {
-  return {
-    ...tagStyles[index % tagStyles.length],
-  };
-}
+
 
 </script>

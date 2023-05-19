@@ -1,7 +1,7 @@
 <template>
   <NAffix class="art-cnt-nav" :trigger-top="72" position="fixed">
     <div class="wrapper">
-      <Toc :header="{ level: 2 }" />
+      <Toc :header="{ levels: 4 }" />
     </div>
   </NAffix>
 </template>
