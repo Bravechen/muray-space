@@ -6,7 +6,7 @@ heroImageDark: '/assets/hd-wallpaper-5858656_1280.jpg'
 # heroAlt: ''
 # heroHeight: 280
 heroText: "Muray's space"
-tagline: '您好 Hello Hola Bonjour здравств buondì'
+tagline: '您好 Hello Hola Enchanté Здра́вствуйте Salve'
 actions:
   - text: 文章
     link: /articles/

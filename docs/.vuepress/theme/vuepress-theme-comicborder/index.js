@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import { filterNavPagesIndexLayout, filterArtPagesLayout, combineAndSetPagesData } from './pages/pageTools.js';
 import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 
-import { tipContainerPlugins, specContainerPlugins, codeContainerPlugins } from './plugins/containerPlugins.js';
+import { tipContainerPlugins, specContainerPlugins, codeContainerPlugins, swiperContainerPlugins } from './plugins/containerPlugins.js';
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { supperls } from './plugins/languagePlugin.js';
@@ -86,9 +86,17 @@ export const comicborderTheme = (clientThemeOpt, ...args) => {
         ...codeContainerPlugins,
         registerComponentsPlugin({
           components: {
-            'codegroup': path.resolve(__dirname, './global-components/CodeGroup.vue'),
-            'codegroupitem': path.resolve(__dirname, './global-components/CodeGroupItem.vue'),
+            'code-group': path.resolve(__dirname, './global-components/CodeGroup.vue'),
+            'code-group-item': path.resolve(__dirname, './global-components/CodeGroupItem.vue'),
             'Badge': path.resolve(__dirname, './global-components/Badge.vue'),
+          }
+        }),
+        //-------------------- swiper container --------------------
+        ...swiperContainerPlugins,
+        registerComponentsPlugin({
+          components: {
+            'Swiper': path.resolve(__dirname, './global-components/Swiper.vue'),
+            'swiper-item': path.resolve(__dirname, './global-components/SwiperItem.vue'),
           }
         }),
         //-------------------- prismjs --------------------

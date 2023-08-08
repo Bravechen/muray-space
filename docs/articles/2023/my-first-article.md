@@ -131,9 +131,21 @@ console.log('Hello world!');
 ---
 ## 使用表情
 
-:EMOJICODE:
+:smile: :laughing: :hospital: :full_moon:
 
 ## 图片轮播
+
+:::: swiper
+
+::: swiper-item img
+/assets/man-2377597_1920.jpg
+:::
+
+::: swiper-item img
+/assets/hd-wallpaper-5858656_1280.jpg
+:::
+
+::::
 
 ## `markdown`主题样式
 
@@ -202,6 +214,8 @@ _斜体文字_
 - [x] Plan B
 
 ### 公式
+
+公式支持latex格式。
 
 行内:
 

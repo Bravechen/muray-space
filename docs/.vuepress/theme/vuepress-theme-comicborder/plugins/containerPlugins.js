@@ -123,8 +123,8 @@ export const specContainerPlugins = [
 export const codeContainerPlugins = [
   containerPlugin({
     type: 'code-group',
-    before: info => `<codegroup>${info}`,
-    after: () => '</codegroup>',
+    before: info => `<code-group>${info}`,
+    after: () => '</code-group>',
     defaultTitle: {
       '/': '',
       '/en/': ''
@@ -134,9 +134,33 @@ export const codeContainerPlugins = [
     type: 'code-group-item',
     before: info => {
       // console.log('info=======>', info);
-      return `<codegroupitem tab="${info}" >`;
+      return `<code-group-item tab="${info}" >`;
     },
-    after: () => '</codegroupitem>',
+    after: () => '</code-group-item>',
+    defaultTitle: {
+      '/': '',
+      '/en/': ''
+    },
+  })
+];
+//============================================================
+export const swiperContainerPlugins = [
+  containerPlugin({
+    type: 'swiper',
+    before: info => `<Swiper>${info}`,
+    after: () => '</Swiper>',
+    defaultTitle: {
+      '/': '',
+      '/en/': ''
+    },
+  }),
+  containerPlugin({
+    type: 'swiper-item',
+    before: info => {
+      console.log("===============>>>", info);
+      return `<swiper-item cnt-type="${info}">`
+    },
+    after: () => '</swiper-item>',
     defaultTitle: {
       '/': '',
       '/en/': ''

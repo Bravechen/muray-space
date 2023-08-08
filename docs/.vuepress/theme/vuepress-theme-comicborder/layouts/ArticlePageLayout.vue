@@ -16,7 +16,7 @@
           </time>
         </div>
       </section>
-      <section class="article-hero-img">
+      <section v-if="!!matter.coverImg" class="article-hero-img">
         <div class="pic"><img :src="matter.coverImg" alt="" /></div>
       </section>
       <Content class="article-cnt theme-markdown" />
