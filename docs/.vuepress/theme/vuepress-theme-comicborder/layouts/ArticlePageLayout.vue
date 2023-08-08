@@ -139,9 +139,9 @@ $icon-size: 1rem;
           transform: translateY(-50%);
         @include img();
 
-        & > img {
+        // & > img {
 
-        }
+        // }
       }
     }
 
@@ -175,10 +175,10 @@ const pageData = usePageData();
 const matter = usePageFrontmatter();
 const site = useSiteData();
 
-console.log('This is ArticlePageLayout:-------------------');
-console.log('pageData:', pageData.value);
-console.log('frontmatter:', matter.value);
-console.log('site:', site.value);
+// console.log('This is ArticlePageLayout:-------------------');
+// console.log('pageData:', pageData.value);
+// console.log('frontmatter:', matter.value);
+// console.log('site:', site.value);
 
 const theme = site.value.theme;
 const tags = site.value.articlesData.artTags;

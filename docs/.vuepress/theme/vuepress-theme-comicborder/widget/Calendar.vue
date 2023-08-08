@@ -163,7 +163,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { NCalendar, NConfigProvider, zhCN, dateZhCN, NButton, NIcon, NSwitch } from 'naive-ui';
+import { NCalendar, NConfigProvider, zhCN, dateZhCN, NIcon, NSwitch } from 'naive-ui';
 import { Time } from '@vicons/carbon';
 
 const isHide = ref(true);

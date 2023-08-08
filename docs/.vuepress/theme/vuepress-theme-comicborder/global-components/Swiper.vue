@@ -1,14 +1,10 @@
 <template>
   <div class="swiper-container">
-    <n-carousel
-      direction="horizontal"
-      :show-arrow="true"
-      dot-type="line"
-      dot-placement="bottom"
-      style="height: 240px"
-    >
+    <ClientOnly>
+    <SwiperBox>
       <slot name="default"></slot>
-    </n-carousel>
+    </SwiperBox>
+  </ClientOnly>
   </div>
 </template>
 
@@ -25,6 +21,8 @@
 </style>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, defineAsyncComponent } from 'vue';
+//
+const SwiperBox = defineAsyncComponent(() => import('./SwiperBox.vue'));
 
 </script>

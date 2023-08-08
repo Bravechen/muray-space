@@ -157,7 +157,7 @@ export const swiperContainerPlugins = [
   containerPlugin({
     type: 'swiper-item',
     before: info => {
-      console.log("===============>>>", info);
+      // console.log("===============>>>", info);
       return `<swiper-item cnt-type="${info}">`
     },
     after: () => '</swiper-item>',
