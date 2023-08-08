@@ -131,7 +131,12 @@ export const comicborderTheme = (clientThemeOpt, ...args) => {
         //-------------------- toc --------------------
         tocPlugin({
 
-        })
+        }),
+        //-------------------- git --------------------
+        gitPlugin({
+          createdTime: true,
+          updatedTime: true,
+        }),
       ],
 //-------------------- dev cycle --------------------
       extendsPageOptions(pageOpt, app) {

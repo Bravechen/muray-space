@@ -8,11 +8,11 @@
         <div class="base-info">
           <time class="create-time">
             <i class="icon"><CalendarOutline /></i>
-            <span>撰写：{{ matter.date }}</span>
+            <span>撰写：{{ createTime }}</span>
           </time>
           <time class="update-time">
             <i class="icon"><Time /></i>
-            <span>上次更新：</span>
+            <span>上次更新：{{ updateTime }}</span>
           </time>
         </div>
       </section>
@@ -202,6 +202,16 @@ const categoryList = computed(function() {
       ...category,
     };
   });
+});
+
+const updateTime = computed(function() {
+  const date = new Date(pageData.value.git.updatedTime);
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+});
+
+const createTime = computed(function() {
+  const date = new Date(pageData.value.git.createdTime);
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 });
 
 
