@@ -146,6 +146,7 @@ $icon-size: 1rem;
     }
 
     .category-tag {
+      margin-top: 1.25rem;
 
       .art-categories {
         margin-bottom: 0.75rem;

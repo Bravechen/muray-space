@@ -1,6 +1,6 @@
 <template>
   <li class="article">
-    <figure class="pic">
+    <figure v-if="!!coverImg" class="pic">
       <img :src="coverImg" alt="cover" />
     </figure>
     <a class="info" :href="path">
@@ -27,6 +27,7 @@
 @import '../styles/common.scss';
 .article {
   display: block;
+  margin-bottom: 1rem;
 
   box-sizing: border-box;
   border-radius: var(--theme-border-radius1);
