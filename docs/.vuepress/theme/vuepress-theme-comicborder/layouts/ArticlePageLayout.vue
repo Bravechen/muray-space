@@ -52,6 +52,7 @@ $icon-size: 1rem;
     align-items: flex-start;
     height: auto;
     margin-left: 1.5rem;
+    overflow: hidden;
 
     @include themeContainer();
 
@@ -145,8 +146,12 @@ $icon-size: 1rem;
       }
     }
 
+    .article-cnt {
+      width: 100%;
+    }
+
     .category-tag {
-      margin-top: 1.25rem;
+      margin-top: 3rem;
 
       .art-categories {
         margin-bottom: 0.75rem;
