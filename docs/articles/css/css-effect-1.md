@@ -342,3 +342,10 @@ MDN:
 <div class="effect2 box">
   <div class="cover"></div>
 </div>
+
+## 参考
+
+- [CSS3实现3D翻牌效果](https://juejin.cn/post/6844903617967702029)
+- [CSS实现翻牌效果](https://juejin.cn/post/6844903934708940808)
+- [如何使用纯 CSS 创建翻牌动画](https://cloud.tencent.com/developer/article/1968599)
+- [css3实现翻牌效果](https://codepen.io/tianyuhan/pen/JZdzRj)
