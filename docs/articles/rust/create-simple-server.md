@@ -6,7 +6,7 @@ date: 2023-12-20
 permalinkPattern: :year/:slug.html
 editLink: false
 lastUpdated: true
-category: Rust CookBook
+category: Rust Development
 tags:
   - "Rust"
 coverImg: ""
@@ -87,10 +87,10 @@ Cargo.html
 
 ::: code-group-item main.rs
 ```rust
-use std::{ 
-    io::{ prelude::*, BufReader }, 
-    fs, 
-    net::{TcpListener, TcpStream} 
+use std::{
+    io::{ prelude::*, BufReader },
+    fs,
+    net::{TcpListener, TcpStream}
 };
 
 fn main() {
