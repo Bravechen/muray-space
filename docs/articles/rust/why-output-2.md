@@ -9,6 +9,7 @@ lastUpdated: true
 category: Rust CookBook
 tags:
   - "Rust"
+  - "Rust基础练习"
 coverImg: ""
 ---
 
