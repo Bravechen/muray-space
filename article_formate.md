@@ -1,4 +1,3 @@
-
 ## 代码演示tab
 
 代码演示可以用tab形式，演示各个文件内容
@@ -17,32 +16,39 @@
 
 :::: code-group
 ::: code-group-item HTML
+
 ```html
 <div class="welcome">您好</div>
 ```
+
 :::
 ::: code-group-item CSS
+
 ```css
 .welcome {
   font-size: 16px;
 }
 ```
+
 :::
 ::: code-group-item JS
+
 ```js
 console.log('Hello, world');
 ```
+
 :::
 ::::
 
 ## 代码块高亮
 
-```js{1, 3-4}
+```js{1,
 var a = 1;
 var b = 2;
 var c = 3;
 var d = 4;
 ```
+
 以上表示第一行高亮，第三行到第四行高亮
 
 ## 徽章
@@ -101,7 +107,6 @@ console.log('Hello world!');
 这是一段笔记内容
 :::
 
-## 使用表情
 
 ## 使用表情
 
@@ -166,7 +171,6 @@ _斜体文字_
 2. 衣带渐宽终不悔，为伊消得人憔悴
 3. 众里寻他千百度过，蓦然回首，那人却在灯火阑珊处。
 
-
 ### 表格
 
 |姓名\学科|语文|数学|英语|
@@ -178,6 +182,7 @@ _斜体文字_
 ### 图片
 
 ![image](/assets/beach-g8153c8171_640.jpg)
+
 ### 链接
 
 [这是一个链接](https://muray.xyz)
@@ -197,13 +202,22 @@ Euler's identity $e^{i\pi}+1=0$ is a beautiful formula in $\mathbb{R}^2$.
 
 块语法:
 
-$$\frac {\partial^r} {\partial \omega^r} \left(\frac {y^{\omega}} {\omega}\right) 
-= \left(\frac {y^{\omega}} {\omega}\right) \left\{(\log y)^r + \sum_{i=1}^r \frac {(-1)^i r \cdots (r-i+1) (\log y)^{r-i}} {\omega^i} \right\}$$
+$$
+\frac {\partial^r} {\partial \omega^r} \left(\frac {y^{\omega}} {\omega}\right) 
+= \left(\frac {y^{\omega}} {\omega}\right) \left\{(\log y)^r + \sum_{i=1}^r \frac {(-1)^i r \cdots (r-i+1) (\log y)^{r-i}} {\omega^i} \right\}
+$$
 
 ### 标题
+
 # 大标题
+
 ## 二标题
+
 ### 三标题
+
 #### 四标题
+
 ##### 五标题
+
 ###### 六标题
+
