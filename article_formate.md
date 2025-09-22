@@ -42,7 +42,7 @@ console.log('Hello, world');
 
 ## 代码块高亮
 
-```js{1,
+```js{1, 3-4}
 var a = 1;
 var b = 2;
 var c = 3;
