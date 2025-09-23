@@ -9,6 +9,7 @@ lastUpdated: true
 category: Database Development
 tags:
   - "Database"
+  - "DuckDB"
 coverImg: ""
 ---
 
@@ -26,11 +27,41 @@ $ brew install duckdb
 
 ### 在 rust 项目中进行安装
 
+```shell
+cargo add duckdb --features bundled
+```
+
 ### 在 python 项目中进行安装
+
+建议使用`uv`管理虚拟环境并进行安装
+
+例如，在一个名为`learn_duckdb`的目录下执行
+
+初始化项目
+```shell
+$ uv init .
+```
+
+```shell
+$ uv venv
+```
+会建立一个虚拟环境，然后安装`duckdb`
+
+```shell
+$ uv add duckdb
+```
+
+最后激活虚拟环境
+
+```shell
+$ source .venv/bin/activate
+```
 
 ### 在 node.js 项目中进行安装
 
 ### 在 go 项目中进行安装
+
+---
 
 ## 创建数据库并进行持久化
 
@@ -110,6 +141,8 @@ fn main() {
 也可以使用`conn.close()`显式关闭连接。
 在典型情况下，这两者之间没有太大区别，但如果有错误发生，可以通过`.close()`方法显式关闭。
 
+---
+
 ## 创建数据库表
 
 我们可以通过直接使用`query`的形式创建和操作数据库表。这里我们假设需要创建一个用于存放文章数据的表。
@@ -131,7 +164,7 @@ fn main() {
 import operation
 
 def main():
-    create_db_safe()
+    operation.create_db_safe()
 
 
 if __name__ == "__main__":
@@ -314,10 +347,12 @@ fn check_sequence_exists(con: &Connection, sequence_name: &str) -> Result<bool> 
 
 ### 查
 
+#### 简单的查询
+
 让我们从最简单的查询开始。
 如果使用了命令行，那么我们直接编写语句`SELECT * FROM articles;`。就可以查询所有记录的文章信息。
 
-#### python
+##### python
 
 ::: note
 
@@ -343,6 +378,19 @@ fn check_sequence_exists(con: &Connection, sequence_name: &str) -> Result<bool> 
 - 如果你需要重复执行同一条语句（尤其是带参数的），使用`execute()`可能会更高效，因为你可以预处理语句。
 
 对于简单快速的查询和探索，`sql()`的简洁性和链式能力非常出色。对于更复杂或需要精细控制的场景，`execute()`提供了更多的灵活性。
+
+**参数化查询方式不同**
+
+`sql()`和`execute()`都能进行参数化查询，但是两个方法使用的形式有不同：
+
+```python
+# 使用 sql() 进行参数化查询
+duckdb.sql("SELECT * FROM tbl WHERE id = ?", params=[1])
+
+# 使用 execute() 进行参数化查询
+cursor = duckdb.execute("SELECT * FROM tbl WHERE id = ?", [1])
+result = cursor.fetchall()
+```
 
 :::
 
@@ -404,14 +452,18 @@ def show_data(con: duckdb.DuckDBPyConnection, table_name: str) -> None:
 
 ::::
 
-#### rust
+##### rust
 
 ::: note
 
-在rust中，也有`execute()`方法。作为执行单个SQL语句的便捷方法。在成功的情况下，返回更改、插入或删除的行数。
+在 rust 中，也有`execute()`方法。作为执行单个 SQL 语句的便捷方法。在成功的情况下，返回更改、插入或删除的行数。
 如果 SQL 无法转换为与 C 兼容的字符串或如果底层的 DuckDB 调用失败，将返回 Err。
 
-签名：`pub fn execute<P: Params>(&self, sql: &str, params: P) -> Result<usize>`
+签名：
+
+```rust
+pub fn execute<P: Params>(&self, sql: &str, params: P) -> Result<usize>
+```
 
 ```rust
 fn update_rows(conn: &Connection) {
@@ -420,15 +472,52 @@ fn update_rows(conn: &Connection) {
         Err(err) => println!("update failed: {}", err),
     }
 }
+
+// 使用params!宏
+
+fn update_rows(conn: &Connection) {
+    match conn.execute("UPDATE foo SET bar = ? WHERE qux = ?", params![&"baz", 1i32]) {
+        Ok(updated) => println!("{} rows were updated", updated),
+        Err(err) => println!("update failed: {}", err),
+    }
+}
+
 ```
+
+还有一个类似的方法`execute_batch()`方法。可以批量执行多条 SQL 语句， 但是不接受任何参数。
+
+```rust
+pub fn execute_batch(&self, sql: &str) -> Result<()>
+```
+
+```rust
+fn create_tables(conn: &Connection) -> Result<()> {
+    conn.execute_batch("BEGIN;
+                        CREATE TABLE foo(x INTEGER);
+                        CREATE TABLE bar(y TEXT);
+                        COMMIT;",
+    )
+}
+```
+
+---
 
 如果要对查询的结果进行更多更灵活的操作，可以使用`prepare()`获取`Statement`结构体实例，然后使用实例方法进行操作。
 
 - `prepare()`签名: `pub fn prepare(&self, sql: &str) -> Result<Statement<'_>>`
-- `Statement`结构体，有三个常用的查询方法：
-  - `.query()`: `pub fn query<P: Params>(&mut self, params: P) -> Result<Rows<'_>>`
-  - `.query_map()`: `pub fn query_map<T, P, F>(&mut self, params: P, f: F,) -> Result<MappedRows<'_, F>> where P: Params, F: FnMut(&Row<'_>) -> Result<T>,`
-  - `.query_and_then()`: `pub fn query_and_then<T, E, P, F>(&mut self, params: P, f: F,) -> Result<AndThenRows<'_, F>> where P: Params, E: From<Error>, F: FnMut(&Row<'_>) -> Result<T, E>,`
+- `Statement`结构体
+
+---
+
+**`Statement`有三个常用的查询方法：**
+
+- `.query()`: 执行预定义语句，返回结果行的句柄。由于生命周期限制，查询返回的行句柄不实现`Iterator`特质。考虑使用`query_map`或`query_and_then`代替，它们实现了这一特质。
+
+签名：
+
+```rust
+pub fn query<P: Params>(&mut self, params: P) -> Result<Rows<'_>>
+```
 
 ```rust
 fn get_names(conn: &Connection) -> Result<Vec<String>> {
@@ -441,6 +530,64 @@ fn get_names(conn: &Connection) -> Result<Vec<String>> {
     }
 
     Ok(names)
+}
+```
+
+- `.query_map()`: 执行预定义语句，并对结果行应用一个函数，返回映射函数结果的迭代器。`f`用于将流式迭代器转换为标准迭代器。这等价于`stmt.query(params)?.mapped(f)`。
+
+签名：
+
+```rust
+pub fn query_map<T, P, F>(
+  &mut self,
+  params: P, f: F,
+) -> Result<MappedRows<'_, F>>
+where
+  P: Params,
+  F: FnMut(&Row<'_>) -> Result<T>,
+```
+
+```rust
+fn get_names(conn: &Connection) -> Result<Vec<String>> {
+    let mut stmt = conn.prepare("SELECT name FROM people")?;
+    let rows = stmt.query_map([], |row| row.get(0))?; // 这里使用了闭包
+
+    let mut names = Vec::new();
+    for name_result in rows {
+        names.push(name_result?);
+    }
+
+    Ok(names)
+}
+```
+
+- `.query_and_then()`:
+
+签名：
+
+```rust
+pub fn query_and_then<T, E, P, F>(
+  &mut self,
+  params: P,
+  f: F,
+) -> Result<AndThenRows<'_, F>>
+where
+  P: Params,
+  E: From<Error>,
+  F: FnMut(&Row<'_>) -> Result<T, E>,
+```
+
+```rust
+fn get_names(conn: &Connection) -> Result<Vec<String>> {
+    let mut stmt = conn.prepare("SELECT name FROM people WHERE id = ?")?;
+    let rows = stmt.query_and_then(["one"], |row| row.get::<_, String>(0))?; // 这里使用了闭包
+
+    let mut persons = Vec::new();
+    for person_result in rows {
+        persons.push(person_result?);
+    }
+
+    Ok(persons)
 }
 ```
 
@@ -506,3 +653,252 @@ art_id: {:?}
     Ok(())
 }
 ```
+
+#### 条件查询
+
+让我们增加一些条件，看看在相对复杂的场景下，应该如何查询。
+这里我们完成三项任务：
+
+1. 获取文章的`id`、`art_id`和`title`三个字段组成一个数组，元素为一个元组。
+2. 定义一个`Article`类，然后将`articles`表中的数据填充到类实例中，最后返回类实例数组。
+3. 获取指定文章id的一条数据，并用文章标题和摘要组成的一个元组。
+
+##### python
+
+:::note
+
+标准的`DuckDB Python API`提供了一个符合[PEP 249 描述的 DB-API 2.0 规范](https://www.python.org/dev/peps/pep-0249/)的 SQL 接口，类似于[SQLite Python API](https://docs.python.org/3.7/library/sqlite3.html)。
+
+可以使用连接的`execute()`方法向`DuckDB`发送`SQL`查询。
+一旦查询被执行，可以使用连接上的`fetchone`和`fetchall`方法检索结果。
+
+- `fetchall`将检索所有结果并完成事务。
+- `fetchone`在每次调用时，将检索一行结果，直到没有更多结果可用。只有当调用`fetchone`并且没有更多结果剩余时（返回值将为`None`），事务才会关闭。例如，在只返回单行的查询的情况下，应调用`fetchone`一次以检索结果，然后再次调用以关闭事务。
+
+使用`sql()`方法返回值也可以使用这些方法。
+
+:::
+
+在之前的代码中，我添加三个函数和一个类来完成指定的功能。
+
+:::: code-group
+
+::: code-group-item main.py
+
+```python
+import operation
+
+def main():
+    db_path = operation.create_db_safe()
+    print(db_path)
+
+    con = operation.connect_db(db_path)
+    # operation.show_data(con, "articles")
+    titles = operation.show_art_titles(con)
+    print(titles)
+
+    art_list = operation.get_art_list(con)
+    print(art_list)
+
+    art_tuple = operation.show_one_art_title_description(con, 1)
+    print("art id 1 title and description:", "title:", art_tuple[0], "description:", art_tuple[1])
+
+if __name__ == "__main__":
+    main()
+```
+
+:::
+
+::: code-group-item operation.py
+
+```python
+def show_art_titles(con: duckdb.DuckDBPyConnection) -> list[(str, int, int)]:
+    """展示文章标题"""
+    con.sql("SELECT title, id, art_id FROM articles;").show()
+    return con.sql("SELECT title, id, art_id FROM articles;").fetchall()
+
+class Article:
+    """文章类"""
+    def __init__(self, title: str, id: int, art_id: int, content: str, description: str):
+        self.title = title
+        self.id = id
+        self.art_id = art_id
+        self.content = content
+        self.description = description
+
+def get_art_list(con: duckdb.DuckDBPyConnection) -> list[Article]:
+    """获取文章列表"""
+    articles = con.sql("SELECT title, id, art_id, content, description FROM articles;").fetchall()
+    return [Article(title=article[0], id=article[1], art_id=article[2], content=article[3], description=article[4]) for article in articles]
+
+def show_one_art_title_description(con: duckdb.DuckDBPyConnection, id: int) -> (str, str):
+    """展示一篇文章的标题和描述"""
+    con.execute("SELECT title, description FROM articles WHERE id = ?", [id])
+    article = con.fetchone()
+    con.fetchone()
+    return (article[0], article[1])
+```
+
+:::
+
+::::
+
+##### rust
+
+使用 rust 完成上面描述的三项任务，我们这次要用到`query_map()`和`query_one()`方法。
+
+::: note
+
+:::
+
+为了让代码更加清晰，我们把有关数据库的操作函数都集中于模块文件`operation.rs`中，然后在`main.rs`中引入。
+
+:::: code-group
+
+::: code-group-item main.rs
+
+```rust
+mod operation;
+
+fn main() {
+    println!("让我们来学习在Rust中使用DuckDB");
+
+    let db_path = operation::create_table_safe().expect("无法创建数据库");
+    let con = operation::connect_db(&db_path);
+
+    if con.is_err() {
+        println!("无法连接数据库");
+        return;
+    }
+
+    let con = con.unwrap();
+
+    // * 打印表中的数据
+    operation::show_data(&con, "articles").expect("无法打印数据");
+
+    // * 打印文章标题列表
+    println!("===============================================打印文章标题列表===============================================");
+    let titles = operation::show_art_titles(&con);
+    println!("titles: {:?}", titles);
+
+    // * 获取文章列表
+    println!("===============================================获取文章列表===============================================");
+    let art_list = operation::get_art_list(&con);
+    if art_list.is_ok() && !art_list.as_ref().unwrap().is_empty() {
+        for art in art_list.unwrap() {
+            println!(r#"-----------------------------------------------
+ID: {}
+标题: {}
+描述: {}
+内容: {}
+文章ID: {}
+-----------------------------------------------"#,
+                art.id,
+                art.title,
+                art.description,
+                art.content,
+                art.art_id
+            );
+        }
+    }
+
+    // * 打印文章标题和描述
+    println!("===============================================打印文章标题和描述===============================================");
+    let title_description = operation::show_art_title_description(&con, 101);
+    println!("title_description: {:?}", title_description.unwrap());
+}
+
+
+```
+
+:::
+
+::: code-group-item operation.rs
+
+```rust
+//? ============================================================
+/// 打印文章标题列表
+pub fn show_art_titles(con: &Connection) -> Result<Vec<(String, i32, i32)>> {
+    let sql = "SELECT title, id, art_id FROM articles;";
+    let mut stmt = con.prepare(sql)?;
+    if !stmt.exists([])? {
+        println!("没有数据");
+        return Ok(vec![]);
+    }
+    println!("有数据：{:?}", stmt.exists([])?);
+    let rows = stmt.query_map([], |row| {
+        Ok((
+            row.get::<usize, String>(0)?,
+            row.get::<usize, i32>(1)?,
+            row.get::<usize, i32>(2)?,
+        ))
+    })?;
+
+    let titles: Vec<(String, i32, i32)> = rows.collect::<Result<_, _>>()?;
+
+    Ok(titles)
+}
+
+#[derive(Debug)]
+pub struct Article {
+    pub id: i32,
+    pub title: String,
+    pub description: String,
+    pub content: String,
+    pub art_id: i32,
+}
+
+/// 获取文章列表
+pub fn get_art_list(con: &Connection) -> Result<Vec<Article>> {
+    let sql = "SELECT title, id, art_id, content, description FROM articles;";
+    let mut stmt = con.prepare(sql)?;
+    let rows = stmt.query_map([], |row| {
+        Ok(Article {
+            id: row.get::<usize, i32>(1)?, // 修正索引顺序
+            title: row.get::<usize, String>(0)?,
+            description: row.get::<usize, String>(4)?,
+            content: row.get::<usize, String>(3)?,
+            art_id: row.get::<usize, i32>(2)?,
+        })
+    })?;
+
+    // 步骤分解：
+    // 1. rows 是 Iterator<Item = Result<Article, duckdb::Error>>
+    // 2. collect() 将迭代器收集成 Vec<Result<Article, duckdb::Error>>
+    // 3. ? 操作符解包 Result，如果有错误就返回错误，成功就得到 Vec<Article>
+    let art_list: Vec<Article> = rows.collect::<Result<Vec<Article>, duckdb::Error>>()?;
+
+    Ok(art_list)
+}
+
+/// 打印文章标题和描述
+pub fn show_art_title_description(con: &Connection, id: i32) -> Result<(String, String)> {
+    let sql = "SELECT title, description FROM articles WHERE id = ?;";
+    let mut stmt = con.prepare(sql)?;
+    let rows = stmt.query_one([id], |row| {
+        // row 的类型是 duckdb::Row
+        // 它代表数据库查询结果中的一行数据
+        Ok((row.get::<_, String>(0)?, row.get::<_, String>(1)?))
+    });
+
+    if rows.is_err() {
+        eprintln!("没有数据: {:?}", rows.err());
+        return Ok((String::new(), String::new()));
+    }
+
+    let list = rows.unwrap();
+
+    Ok(list)
+}
+
+```
+
+:::
+
+::::
+
+### 改
+
+### 增
+
+### 删
