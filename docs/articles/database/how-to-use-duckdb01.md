@@ -749,6 +749,83 @@ def show_one_art_title_description(con: duckdb.DuckDBPyConnection, id: int) -> (
 
 ::: note
 
+__query_map__
+
+执行预定义语句，并将函数映射到结果行上，返回映射函数结果的迭代器。
+
+签名：
+```rust
+pub fn query_map<T, P, F>(
+    &mut self,
+    params: P,
+    f: F,
+) -> Result<MappedRows<'_, F>>
+where
+    P: Params,
+    F: FnMut(&Row<'_>) -> Result<T>,
+```
+参数：
+ - `params` 这个参数数组用于绑定`SQL`查询中的占位符（如 ?）。通常是 `&[&dyn ToSql]`或类似的参数类型。参数必须按照 SQL 查询中占位符出现的顺序提供。
+ - `f` 闭包函数，将作用于每一个元素
+这等价于 `stmt.query(params)?.mapped(f)`.
+
+```rust
+fn get_names(conn: &Connection) -> Result<Vec<String>> {
+    let mut stmt = conn.prepare("SELECT name FROM people")?;
+    let rows = stmt.query_map([], |row| row.get(0))?;
+
+    let mut names = Vec::new();
+    for name_result in rows {
+        names.push(name_result?);
+    }
+
+    Ok(names)
+}
+```
+---
+__query_and_then__
+
+与`query_map`类似的还有`query_and_then()`
+
+签名：
+
+```rust
+pub fn query_and_then<T, E, P, F>(
+    &mut self,
+    params: P,
+    f: F,
+) -> Result<AndThenRows<'_, F>>
+where
+    P: Params,
+    E: From<Error>,
+    F: FnMut(&Row<'_>) -> Result<T, E>,
+```
+
+执行预定义语句，并对结果行应用一个函数，该函数返回一个包含错误类型的`Result`（实现了`std::convert::From<Error>`，以便统一错误处理）。
+
+`query_map()`与`query_and_then()`最大的不同是，`query_and_then()`中的闭包可以返回错误。导致两个方法的返回值类型也不相同。
+- `query_map()`自动处理错误，如果迭代中发生错误，那么整个处理过程会停止并立即返回迭代错误值。(**全有或全无，错误立即终止**)
+- `query_and_then()`允许每行独立返回成功或错误，不会因为单行错误而停止处理后续行。调用者会获得一个包含每行处理结果的迭代器，需要手动从中分离成功和失败的值。（**逐行处理，错误不终止迭代，但需要手动处理每行结果**）
+---
+__query_one()__
+
+执行查询语句，返回一行数据的便捷方法。
+
+如果查询返回多行，则返回 `Err（QueryReturnedMoreThanOneRow）`。
+
+如果未返回任何结果，则返回 `Err（QueryReturnedNoRows）`。如果查询确实是可选的，则可以对其结果调用` .optional（） `以获得 `Result<Option<T>>`（要求导入特征 `duckdb：：OptionalExt`）。
+
+如果底层的 DuckDB 调用失败，将返回 Err。
+
+签名：
+
+```rust
+pub fn query_one<T, P, F>(&mut self, params: P, f: F) -> Result<T>
+where
+    P: Params,
+    F: FnOnce(&Row<'_>) -> Result<T>,
+```
+
 :::
 
 为了让代码更加清晰，我们把有关数据库的操作函数都集中于模块文件`operation.rs`中，然后在`main.rs`中引入。
@@ -815,7 +892,7 @@ ID: {}
 
 ::: code-group-item operation.rs
 
-```rust
+```rust{19,51}
 //? ============================================================
 /// 打印文章标题列表
 pub fn show_art_titles(con: &Connection) -> Result<Vec<(String, i32, i32)>> {
@@ -834,7 +911,7 @@ pub fn show_art_titles(con: &Connection) -> Result<Vec<(String, i32, i32)>> {
         ))
     })?;
 
-    let titles: Vec<(String, i32, i32)> = rows.collect::<Result<_, _>>()?;
+    let titles: Vec<(String, i32, i32)> = rows.collect::<Result<_, _>>()?;  //转换为Vector数组
 
     Ok(titles)
 }
@@ -866,7 +943,7 @@ pub fn get_art_list(con: &Connection) -> Result<Vec<Article>> {
     // 1. rows 是 Iterator<Item = Result<Article, duckdb::Error>>
     // 2. collect() 将迭代器收集成 Vec<Result<Article, duckdb::Error>>
     // 3. ? 操作符解包 Result，如果有错误就返回错误，成功就得到 Vec<Article>
-    let art_list: Vec<Article> = rows.collect::<Result<Vec<Article>, duckdb::Error>>()?;
+    let art_list: Vec<Article> = rows.collect::<Result<Vec<Article>, duckdb::Error>>()?; //转换为Vector数组
 
     Ok(art_list)
 }
@@ -890,7 +967,6 @@ pub fn show_art_title_description(con: &Connection, id: i32) -> Result<(String, 
 
     Ok(list)
 }
-
 ```
 
 :::
