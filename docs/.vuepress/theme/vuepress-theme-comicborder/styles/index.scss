@@ -10,6 +10,13 @@
   background-color: var(--bg-color1);
 }
 
+@media (min-width: 1920px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+
 body {
   @include fns.resetAll();
   overflow-x: hidden;
