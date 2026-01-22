@@ -41,19 +41,21 @@ coverImg: ""
 
 在我们理解这个过程是如何工作的前提下，我们需要暂时放下地图，来了解神经网络的基本构建模块，也就是“神经元”。神经元其实就是一个数学函数，有多个输入和一个输出。你输入一些数字，它就会输出一个新的数字，仅此而已。
 
-<iframe src="/assets/ai01/3_Labelled-Neuron-1.html" width="560" height="287" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/3_Labelled-Neuron-1.html" width="560" height="287" scrolling="no" ]]]
+
 
 更简单来说，神经元的输出通常会非常接近于0或1。
 具体接近哪一个，取决于输入以及另一组被称为“参数”的数字。
 对于有两个输入的神经元来说，它具有三个参数。
 其中两个叫作“权重”(`weights`)，用于决定每个输入对输出的影响程度。
-第三个参数叫作“偏差”(`bias`)，它决定了神经元整体偏向输出0还是1。
+第三个参数叫作“偏置”(`bias`)，它决定了神经元整体偏向输出0还是1。
 
 > `weights`权重，权重通常用于描述神经元输入的相对重要性，在机器学习和神经网络中常见。
 >
-> 在机器学习中，`bias`通常指偏差，是一个影响模型预测结果的参数。
+> `bias` 指偏置或偏差，在机器学习中，它是一个影响模型预测结果的参数。
 
-<iframe src="/assets/ai01/4_Parameters-Changing.html" width="560" height="293" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/4_Parameters-Changing.html" width="560" height="293" scrolling="no" ]]]
+
 
 现在，让我们来看看输入和输出之间的关系。下面的三幅图分别展示了三组不同参数设置下的神经元。
 当输入发生变化时，每种情况下神经元的输出都会在某条边界上迅速从0跃升到1。
@@ -73,11 +75,11 @@ coverImg: ""
 神经元会根据当前参数输出一个结果，并将该结果与真实值进行比较。
 有时，神经元会给出正确的答案。
 
-<iframe src="/assets/ai01/CorrectData_2.html" width="560" height="291" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/CorrectData_2.html" width="560" height="291" scrolling="no" ]]]
 
 其他的数据点则会被错误地分类。
 
-<iframe src="/assets/ai01/InCorrect-Data_2.html" width="560" height="291" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/InCorrect-Data_2.html" width="560" height="291" scrolling="no" ]]]
 
 每当神经元给出了错误的答案，自动化算法就会稍微[调整神经元的参数](https://www.quantamagazine.org/what-is-machine-learning-20240708/)，使分界线朝向错误点的方向移动得更近一些。
 
@@ -85,7 +87,7 @@ coverImg: ""
 
 算法会在训练数据上反复多次执行这一过程。最终，我们会得到一组参数，使得这条直线能够最接近地拟合实际的分界线形状。
 
-<iframe src="/assets/ai01/Final_2.html" width="560" height="291" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/Final_2.html" width="560" height="291" scrolling="no" ]]]
 
 最后，我们就可以把这个分类器用到之前未参与训练的新数据上了。虽然它并不是百分之百准确，但大多数情况下都能给出正确的答案。
 
@@ -95,17 +97,17 @@ coverImg: ""
 面对更复杂的问题，我们需要使用许多彼此相连的神经元组成的“神经网络”。
 和单个神经元一样，神经网络本质上也是一种数学函数：输入一些数字，输出则是另外一些数字。
 
-<iframe src="/assets/ai01/NeuralNetworkBox.html" width="560" height="320" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/NeuralNetworkBox.html" width="560" height="320" scrolling="no" ]]]
 
 在神经网络中，神经元被分为若干组，这些组被称为“层”。
 
-<iframe src="/assets/ai01/ExtendedNN2.html" width="560" height="320" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/ExtendedNN2.html" width="560" height="320" scrolling="no" ]]]
 
 每一层可以包含任意数量的神经元，神经网络也可以有任意多层。每一层中神经元的输出将作为下一层神经元的输入。
 
-<iframe src="/assets/ai01/ThreeLayersNeuronNetwork.html" width="560" height="320" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/ThreeLayersNeuronNetwork.html" width="560" height="320" scrolling="no" ]]]
 
-大型神经网络拥有许多参数：每个神经元都有一个偏差(`bias`)，每两个神经元之间的每条连接都有一个权重(`weights`)。这些额外的参数让网络能够学习到更为复杂的边界。
+大型神经网络拥有许多参数：每个神经元都有一个偏置(`bias`)，每两个神经元之间的每条连接都有一个权重(`weights`)。这些额外的参数让网络能够学习到更为复杂的边界。
 
 > `boundaries`边界，在神经网络中，边界通常指神经元之间的连接或决策区域，这些边界可以是复杂的曲线而非直线。
 
@@ -123,11 +125,11 @@ coverImg: ""
 
 在之前的例子中，神经元的两个输入分别是地图上某个点的经度和纬度。神经网络的输入数字同样可以表示其他类型的数据。例如，0到1之间的一个数字可以代表单个像素的灰度值。
 
-<iframe src="/assets/ai01/Number-Plot2.html" width="570" height="146" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/Number-Plot2.html" width="570" height="146" scrolling="no" ]]]
 
 这意味着任意一对像素都可以在一个二维空间中表示为一个点。
 
-<iframe src="/assets/ai01/2DPLot.html" width="560" height="285" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/2DPLot.html" width="560" height="285" scrolling="no" ]]]
 
 ::: note
 
@@ -152,11 +154,11 @@ coverImg: ""
 
 同样，像素的三元组可以对应到三维空间中的一个点。
 
-<iframe src="/assets/ai01/3D-Plot_b.html" width="560" height="285" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/3D-Plot_b.html" width="560" height="285" scrolling="no" ]]]
 
 更多的像素意味着需要更多的维度。虽然我们无法直接可视化三维以上的空间，但研究者们已经开发出一些方法，能够以类似于“观察三维空间的二维快照”的方式，间接地查看这些抽象空间的三维表示。比如，`9`个维度就可以用来表示一个 `3×3` 网格上的各种不同图案。
 
-<iframe src="/assets/ai01/9DPlot.html" width="560" height="325" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai01/9DPlot.html" width="560" height="325" scrolling="no" ]]]
 
 为了说明这种方法的实际用处，我们不妨将输入数量从`9`个跃升到`2500`个，假设它们分别对应一个 `50×50` 的像素网格。
 如此规模的像素排列，可以组成各种有意义的图案，比如猫的照片。每一张猫咪照片都对应于这个 `2,500` 维空间中的一个点。

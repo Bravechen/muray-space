@@ -10,6 +10,8 @@ import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { supperls } from './plugins/languagePlugin.js';
 import { lineNumberPlugin } from './plugins/lineNumberPlugin/index.js';
 import { highlightLinePlugin } from './plugins/hightlightLinePlugin/index.js';
+import { videoPlugin } from './plugins/videoPlugin/index.js';
+import { iframePlugin } from './plugins/iframePlugin/index.js';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links';
 import { tocPlugin } from '@vuepress/plugin-toc';
@@ -112,6 +114,24 @@ export const comicborderTheme = (clientThemeOpt, ...args) => {
         }),
         highlightLinePlugin({
           // 配置项
+        }),
+        //-------------------- video plugin --------------------
+        videoPlugin({
+          // 配置项
+        }),
+        registerComponentsPlugin({
+          components: {
+            'video-box': path.resolve(__dirname, './global-components/VideoBox.vue'),
+          },
+        }),
+        //-------------------- iframe plugin --------------------
+        iframePlugin({
+          // 配置项
+        }),
+        registerComponentsPlugin({
+          components: {
+            'iframe-box': path.resolve(__dirname, './global-components/IframeBox.vue'),
+          },
         }),
         //-------------------- git --------------------
         gitPlugin({

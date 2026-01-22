@@ -24,7 +24,7 @@ coverImg: ""
 在我自己的测试中，我发现只要提示足够长，确实如此。
 我向 Anthropic 和 OpenAI 两边分别发送了上百次请求，发现对于所有输入 token 都被缓存的情况，首次 token 返回的时间延迟显著下降。
 
-<iframe src="/assets/ai02/prompt-caching.html" width="816" height="320" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai02/prompt-caching.html" width="816" height="320" scrolling="no" ]]]
 
 现在我已经用炫酷的渐变文字和漂亮的图表吸引了你的注意，你有没有想过这样一个问题……
 
@@ -54,7 +54,7 @@ coverImg: ""
 
 这个庞大的计算图大致可以分为四个部分。
 
-<iframe src="/assets/ai02/four_parts.html" width="479" height="470" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai02/four_parts.html" width="479" height="470" scrolling="no" ]]]
 
 图中的每一个节点都可以看作一个接受输入并产生输出的函数。输入会被循环地传入 LLM，直到某个特殊的输出值指示其停止。用伪代码可以这样表示：
 
@@ -101,14 +101,14 @@ print(decode(tokens))
 
 ## 分词器（Tokenizer）
 
-<iframe src="/assets/ai02/tokenizer.html" width="630" height="470" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai02/tokenizer.html" width="630" height="470" scrolling="no" ]]]
 
 
 在 LLM 处理你的提示词之前，首先需要将其转换成模型可以理解的内部表示。这一过程主要分为两步，分别由<font color="#d08700">**分词器（tokenizer）**</font>和<font color="#009966">**嵌入（embedding）**</font>阶段完成。为什么要这样做，直到讲到 embedding 时才会明朗，所以请耐心跟随我们先理解分词器到底做了什么。
 
 分词器会把你的输入提示拆分成较小的片段（chunk），对每一个独特的片段分配一个整数编号，称为“token”。举个例子，下面是 `GPT-5 `如何对提示词 "Check out ngrok.ai" 进行分词的：
 
-![image](/assets/ai02/20260121133850.gif)
+[[[ASSETS type="video" src="/assets/ai02/Jietu20260122-112421-HD.mp4" width="650"]]]
 
 提示词被拆分成了数组 `["Check", " out", " ng", "rok", ".ai"]`，并被转换为 `token` 序列 `[4383, 842, 1657, 17690, 75584]`。
 同样的提示词每次都会得到相同的 `token`。
@@ -133,10 +133,7 @@ print(decode(tokens))
 
 让我们来问一个经典的大语言模型问题，亲自体验一下效果。当你准备好时，点击下方的发送按钮。
 
-<video width="560" controls>
-  <source src="/assets/ai02/Jietu20260121-135423-HD.mp4" type="video/mp4">
-</video>
-
+[[[ASSETS type="video" src="/assets/ai02/Jietu20260121-135423-HD.mp4" width="560" height="712"]]]
 
 提示词的 `token` 输入，大语言模型开始✨“作法”✨，输出一个 `token`，然后循环重复。
 这个过程被称为“推理”（`inference`）。需要注意的是，每输出一个 `token`，都会被加入到原始输入中，在下一轮一起送入模型。
@@ -164,7 +161,7 @@ print(decode(tokens))
 
 ## 嵌入（Embedding）
 
-<iframe src="/assets/ai02/embedding.html" width="630" height="470" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai02/embedding.html" width="630" height="470" scrolling="no"]]]
 
 分词器输出的 token 接下来会进入“嵌入（embedding）”阶段。要理解嵌入，首先需要明白模型的目标是什么。
 
@@ -252,7 +249,7 @@ function embed(tokens) {
 
 我们将 `tokens`（一个整数数组）转换为嵌入向量数组，也就是一个“数组的数组”，或称为“矩阵”。你可以在下面切换 `token` 和嵌入的视图，这样可以形象地理解这个过程。
 
-![image](/assets/ai02/20260121142617.gif)
+[[[ASSETS type="video" src="/assets/ai02/Jietu20260122-112829-HD.mp4" width="669" height="665"]]]
 
 `tokens`（如 `[75, 305, 284, 887]`）会被转换为一个由 `3` 维嵌入构成的矩阵。
 
@@ -263,9 +260,7 @@ function embed(tokens) {
 但当你逐步增加到二维、三维时，结构就清晰了——`8` 组各自相关的“家族”一目了然。
 你可以点击 `2D`、`3D` 按钮切换，体验这种变化。
 
-<video width="650" height="650" controls>
-  <source src="/assets/ai02/Jietu20260121-143134-HD.mp4" type="video/mp4">
-</video>
+[[[ASSETS type="video" src="/assets/ai02/Jietu20260121-143134-HD.mp4" width="650" height="640" ]]]
 
 
 这里为了便于直观展示，我最多只能用三维空间做演示。真实的大模型会用成千上万个维度，这已经超出了我们直接想象的范围，你可以试着展开想象，思考在如此高维空间中还能实现哪些复杂的区分与表达。
@@ -300,7 +295,7 @@ function embed(tokens) {
 
 ## Transformer 阶段
 
-<iframe src="/assets/ai02/transform.html" width="479" height="470" border="0" scrolling="no" style="border: none;"></iframe>
+[[[ASSETS type="iframe" src="/assets/ai02/transform.html" width="479" height="470" scrolling="no"]]]
 
 Transformer 阶段的核心，是把嵌入向量作为输入，在 `n` 维空间内不断调整它们的位置。
 实现这种调整的方法有两种，这里我们只介绍第一种：注意力机制（`attention`）。至于「前馈神经网络」（`Feedforward`）和输出阶段，这篇文章暂不展开讨论 👀。
@@ -440,15 +435,159 @@ function attentionWeights(embeddings) {
 
 ```js
 function softmax(matrix) {
+	// 对输入的二维数组（矩阵）每一行做 softmax 归一化
 	return matrix.map(row => {
+		// 对每个元素做指数运算（e^x），得到当前行所有元素的指数值
 		const exps = row.map(x => Math.exp(x));
+		// 计算这些指数值的总和，用于归一化
 		const sumExps = exps.reduce((a, b) => a + b, 0);
+		// 返回本行每个元素归一化后的概率（指数值 / 总和），得到 0~1 之间、总和为1的概率分布
 		return exps.map(exp => exp / sumExps);
 	});
 }
 ```
 
 它其实并不是简单地把数字相加然后分别除以总和，而是先对每个数字进行 `Math.exp` 运算（即 $e^x$）。如果我们用 `0` 而不是负无穷进行掩码，`Math.exp(0) === 1`，这些 `0` 依然会对结果产生权重。而 `Math.exp(-Infinity)` 等于 `0`，这才是我们想要的效果。
+
+下面的网格展示了一个关于提示词 “Mary had a little” 的注意力权重示例。你可以将鼠标悬停或点击网格单元格，查看每个 token 的贡献。这些权重与上面计算的例子并不完全对应，因为我从非常棒的 [Transformer Explained](https://poloclub.github.io/transformer-explainer/) 网站上实际运行的 GPT-2 版本中获取了它们。所以这些是来自真实（虽然有些老）的模型的真实权重。
+
+[[[ASSETS type="video" src="/assets/ai02/20260122-085319-HD.mp4" width="650" height="358" ]]]
+
+在第一行中，只有 “Mary” 这个词，所以 “Mary” 对 “had” 的生成贡献了 100%。接着在第二行，“Mary” 的贡献是 79%，而 “had” 的贡献是 21%，用于生成 “a”，以此类推。可以看到，LLM（大模型）认为本句中最重要的词就是 “Mary”，因为在每一行中，“Mary” 的权重都是最高的。如果我让你补全 “Jessica had a little”，你大概率不会选择 “lamb” 这个词作为结尾。
+
+接下来，我们只需要将 token 的嵌入向量进行加权混合。这个过程比生成注意力权重简单得多。
+
+```js
+// WV（Value 权重矩阵）：这是在训练过程中学习得到的参数，推理时保持不变。
+// 维度是 n*n，其中 n 是嵌入向量（embedding）的维度。
+const WV = [[...], [...], ...];
+
+function attention(embeddings) {
+	// 首先将输入的 embedding（嵌入向量）乘以 WV 矩阵，得到 Value 表示。
+	const V = embeddings * WV;
+
+	// attentionWeights 是之前定义过的注意力权重计算函数，
+	// 这里用它来根据 embedding 计算出每个 token 的注意力分数（归一化概率）。
+	const weights = attentionWeights(embeddings);
+
+	// 最终输出：将注意力权重乘以 Value，完成加权混合，得到加权后的向量输出。
+	return weights * V;
+}
+```
+
+和之前类似，我们有一个在训练阶段确定下来的 `WV` 矩阵。我们用这个矩阵将 `token` 的嵌入向量转换为 `V` 矩阵。
+
+![image](/assets/ai02/20260122-090807.png)
+
+::: note
+
+#### 为什么不直接混合嵌入向量？
+
+当我们通过 `Q` 和 `K` 相乘得到注意力权重时，其实是在衡量各个 `token` 之间彼此的相关性。嵌入（embedding）本身编码了各种各样的语义信息，比如某一维可能代表“颜色”、另一维代表“大小”，还有可能是“粗鲁程度”等等。而注意力权重则是用 `token` 之间的相似性来计算它们的相关性。
+
+`WV` 的作用，就是让模型决定哪些信息维度需要被保留下来。以句子 “Mary had a little” 为例，对于 “Mary” 这个词，重要的是她的名字。模型同样可能学到了一些关于饮品“血腥玛丽”或“苏格兰女王玛丽”的特征，但这些与儿歌场景并无关系，如果一并保留会引入噪声。通过 `WV`，模型可以在混合嵌入向量前，过滤掉这些无关的特征信息，只保留真正有用的内容。
+
+:::
+
+接下来，我们将计算得到的 `V` 与注意力权重相乘，输出就是一组新的嵌入向量：
+
+![image](/assets/ai02/20260122-091153.png)
+
+注意力机制的最终输出，是这个输出矩阵的最后一行。所有前面 `token` 的上下文信息，已经通过注意力机制混合到了这最后一行中——但为了得到它，前面的所有行也都必须一一计算出来。
+
+总的来说，输入是**嵌入向量**，输出也是新的**嵌入向量**。注意力机制通过复杂的数学计算，把不同 `token` 按照它们的重要性进行加权混合，而这些重要性由模型在训练过程中学到的 `WQ`、`WK` 和 `WV` 矩阵共同决定。这就是让大模型能够在上下文窗口内判断“哪些信息重要、为什么重要”的关键机制。
+
+现在，我们终于掌握了关于缓存所需的全部知识，可以开始讨论缓存机制了。
+
+::: note
+
+#### 注意力机制还有更多内容
+
+这里展示的是一个简化版的注意力机制（没错，其实已经很简化了），主要是为了突出与提示词缓存相关的核心原理。实际上注意力机制还有更多细节，如果你想更深入了解，推荐观看 [3blue1brown 制作的关于注意力机制的视频](https://www.youtube.com/watch?v=eMlx5fFNoYc)。
+
+:::
+
+## 提示词缓存
+
+让我们再来看一遍上面的表格，这一次，你将看到在推理循环中，每生成一个新 token，这个格子是如何被逐步填充的。点击播放可以开始观看动画演示。
+
+[[[ASSETS type="video" src="/assets/ai02/Jietu20260122-091844-HD.mp4" width="650" height="370" ]]]
+
+每生成一个新 `token`，模型都会把它加到输入序列末尾，并将整个序列重新处理一遍。但如果你仔细观察动画，反复播放几次，就会发现：前面已经计算出的权重其实是不会改变的。比如第二行的结果总是 `0.79` 和 `0.21`，第三行也一直是 `0.81`、`0.13`、`0.06`。换句话说，我们重复进行了许多完全没有必要的计算。对于 "Mary had a little" 这样的输入，如果你刚刚处理过 "Mary had a"，许多矩阵乘法其实根本不需要再做，这正是目前大模型推理循环的工作方式。
+
+你可以通过对推理循环做两点改动，避免这些重复计算：
+
+- 在每次迭代时缓存 `K` 和 `V` 矩阵。
+- 每次只将最新生成的 `token` 输入模型，而不是整个提示词序列。
+
+我们再来快速过一遍这个矩阵乘法的过程，不过这一次，前 `4` 个 `token` 的 `K` 和 `V` 矩阵已经被缓存，我们只需要传入一个新 `token` 的嵌入向量。是的，又要做矩阵运算，但别担心，这和前面讲的内容基本一致，我们会很快带你理解。
+
+计算一个新的 `Q`，只会产生一行输出。`WQ` 和之前是一样的，没有发生变化。
+
+![image](/assets/ai02/20260122-092409.png)
+
+计算一个新的 `K`，也只会生成一行输出，且所用的 `WK` 矩阵和之前相同。
+
+![image](/assets/ai02/20260122-092514.png)
+
+然后，我们会把这新生成的一行，追加到上一轮缓存下来的 `4` 行 `K` 矩阵数据后面：
+
+![image](/assets/ai02/20260122-092640.png)
+
+现在我们得到了提示词中所有 `token` 的 `K` 矩阵，但实际上只需要计算出最后一行即可。
+
+我们按照这种方式继续计算，就能得到新的`分数`：
+
+![image](/assets/ai02/20260122-092833.png)
+
+以及新的`权重`：
+
+![image](/assets/ai02/20260122-092932.png)
+
+在整个过程中，我们只计算所需的新内容，之前已经计算过的值完全无需重复计算。接下来，我们同样只需要计算并获取 `V` 矩阵的新一行：
+
+![image](/assets/ai02/20260122-093040.png)
+
+然后把它追加到我们已经缓存的 `V` 矩阵后面：
+
+![image](/assets/ai02/20260122-093220.png)
+
+最后，将新的权重与新的 `V` 相乘，得到最终的新嵌入向量：
+
+![image](/assets/ai02/20260122-093356.png)
+
+我们只需要这一行新的嵌入向量。由于缓存下来的 `K` 和 `V`，这一行已经包含了之前所有 `token` 的上下文信息。
+
+> **缓存下来的数据其实就是嵌入向量分别乘以 `WK` 和 `WV` 后得到的 `K` 和 `V` 矩阵。因此，这种缓存方式通常被称为 “KV 缓存”。**
+
+![image](/assets/ai02/20260122-093629.png)
+
+没错，前面讲到的这些 `K` 和 `V` 矩阵，其实就是服务提供商在大型数据中心里保存的“0101”数据，也是它们能够为我们带来便宜十倍、响应更快 `token` 的关键所在。
+
+服务提供商会在请求完成后，为每个提示词保存这些矩阵 `5-10` 分钟。如果你在这段时间内用相同的开头再次发起请求，它们就可以直接复用已缓存的 `K` 和 `V`，而无需重新计算。更有意思的是，即使你的新请求和之前的缓存只部分匹配，也可以只复用那一部分，而不需要整个完全一样。
+
+下图通过轮流展示几个有相似前缀的提示词，演示缓存（cache）如何被反复利用。每隔一段时间，缓存会被清空，以展示缓存重新填充的过程。
+
+[[[ASSETS type="video" src="/assets/ai02/Jietu20260122-094040-HD.mp4" width="850" height="230" ]]]
+
+`OpenAI` 和 `Anthropic` 在缓存机制上有很大的不同。`OpenAI` 会自动帮你完成所有缓存相关的工作，在可能的情况下会将请求路由到已缓存的结果。在我的实验中，当我发送请求并立刻再次发送同一请求时，命中缓存的几率大约有 `50%`。不过，由于长上下文窗口会显著延长首字节响应时间（`time-to-first-byte`），这会导致实际体验上性能有时不稳定。
+
+`Anthropic` 给你更多的控制权，让你可以自行决定何时缓存以及缓存多长时间。你需要为这种灵活性额外付费，但在我的实验中，只要你要求缓存提示词，`Anthropic` 会 `100%` 命中缓存。这对于需要处理长上下文窗口、追求延迟可预测性的应用场景来说，可能是更加合适的选择。
+
+::: note
+
+#### 等等，`temperature` 是怎么回事？
+
+大多数大模型服务商提供了一些参数，让你可以调整模型输出结果的随机性。
+常见的参数有 `temperature`（温度）、`top_p` 和 `top_k`。
+这些参数都会影响推理循环的最后一步 —— 也就是模型根据每个 `token` 的概率，从全部词汇中挑选下一个 `token` 的过程。
+这个过程发生在注意力机制生成最终嵌入向量之后，因此缓存提示词（`prompt cache`）不会受到这些参数的影响。你可以随意修改这些参数，而不用担心会让缓存失效。
+
+:::
+
+## 总结
+
+写这篇文章的过程中，我学到了很多知识，感觉非常充实。大语言模型（LLM）是非常迷人的技术，我认为整个行业对它们的探索还只是刚刚开始，未来还有巨大的潜力可以挖掘。
 
 
 ## 致谢
@@ -461,3 +600,9 @@ function softmax(matrix) {
 - [Aeree Cho](https://aereeeee.github.io/) 等人的[《Transformer Explainer》 Transformer 解释器](https://poloclub.github.io/transformer-explainer/)
 
 如果你喜欢本文，相信你也一定会喜欢这些资源。
+
+## 关于作者
+
+山姆·罗斯（Sam Rose）
+
+Sam Rose 是 ngrok 的一名高级开发者教育专家，专注于创建帮助开发者充分利用 ngrok 的内容。

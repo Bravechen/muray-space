@@ -25,10 +25,17 @@
 
   .n-tabs {
     .n-tabs-rail {
+
+      .n-tabs-capsule {
+        box-sizing: border-box;
+        border: var(--theme-border1);
+        box-shadow: var(--theme-shadow-color1);
+      }
+
       .n-tabs-tab-wrapper {
         .n-tabs-tab {
           box-sizing: border-box;
-          border: var(--theme-border1);
+          // border: var(--theme-border1);
           border-color: transparent;
           box-shadow: none;
 
@@ -40,11 +47,16 @@
             color: var(--theme-color2);
           }
 
+
+          // .category-tools .n-tabs .n-tabs-rail .n-tabs-tab-wrapper .n-tabs-tab.n-tabs-tab--active
+
           &.n-tabs-tab--active {
             border-color: var(--theme-color2);
-            box-shadow: var(--theme-shadow-color1);
+            // box-shadow: var(--theme-shadow-color1);
+            color: var(--theme-font-color2);
+
             &:hover {
-              color: var(--n-tab-text-color-hover);
+              color: var(--theme-color5);
             }
           }
         }
