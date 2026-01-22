@@ -1,8 +1,10 @@
 @use "fns";
-@import './common.scss';
-@import './skeleton.scss';
+// 使用 @use 替代 @import（Sass 新语法）
+@use './common' as *;      // as * 表示导入到全局作用域，兼容现有代码
+@use './skeleton' as *;
+@use './markdown' as *;
+// 注意：CSS 文件（.css）仍然需要使用 @import
 @import './prism.css';
-@import './markdown.scss';
 
 :root {
   font-size: calc(16 * 100vw / 1920); // 以1920为基础全屏宽度，16px为基础字体大小

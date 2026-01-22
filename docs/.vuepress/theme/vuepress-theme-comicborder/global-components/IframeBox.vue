@@ -17,7 +17,7 @@
       </iframe>
       <div
         class="skeleton-overlay"
-        v-if="!isLoaded"
+        v-if="!isLoaded && isClient"
       >
         <div class="skeleton-content">
           <div class="skeleton-line skeleton-title"></div>
@@ -138,6 +138,7 @@ const props = defineProps({
 });
 
 const isLoaded = ref(false);
+const isClient = ref(false);
 const iframeRef = ref(null);
 
 const iframeBoxStyle = computed(() => {
@@ -189,6 +190,8 @@ const handleError = () => {
 
 // 组件挂载后，设置一个超时，防止某些情况下 load 事件不触发
 onMounted(() => {
+  // 标记为客户端环境
+  isClient.value = true;
   // 如果 5 秒后仍未加载完成，强制显示 iframe（可能是内容加载较慢）
   setTimeout(() => {
     if (!isLoaded.value) {

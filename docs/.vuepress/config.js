@@ -47,6 +47,13 @@ export default defineUserConfig({
       build: {
         target: 'modules',
       },
+      css: {
+        preprocessorOptions: {
+          scss: {
+            silenceDeprecations: ['import']
+          }
+        }
+      },
       plugins: [
         AutoImport({
           imports: [

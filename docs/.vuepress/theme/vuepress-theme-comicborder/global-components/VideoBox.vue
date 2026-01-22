@@ -19,13 +19,13 @@
       </video>
       <div
         class="play-icon-overlay"
-        v-if="!isPlaying && !isLoading"
+        v-if="!isPlaying && !isLoading && isClient"
       >
         <PlayCircleTwotone class="play-icon" color="#999999" />
       </div>
       <div
         class="loading-overlay"
-        v-if="isLoading"
+        v-if="isLoading && isClient"
       >
         <Loading3QuartersOutlined class="loading-icon" color="#999999" />
       </div>
@@ -111,7 +111,7 @@
 </style>
 
 <script setup>
-import { nextTick, computed } from 'vue';
+import { nextTick, computed, onMounted } from 'vue';
 import { ref } from 'vue';
 import { PlayCircleTwotone, Loading3QuartersOutlined } from '@vicons/antd';
 
@@ -132,6 +132,7 @@ const props = defineProps({
 
 const isPlaying = ref(false);
 const isLoading = ref(false);
+const isClient = ref(false);
 
 const videoBoxStyle = computed(() => {
   return {
@@ -240,4 +241,9 @@ const handleCanPlay = () => {
 const handleError = () => {
   isLoading.value = false;
 };
+
+// 组件挂载后，标记为客户端环境
+onMounted(() => {
+  isClient.value = true;
+});
 </script>
